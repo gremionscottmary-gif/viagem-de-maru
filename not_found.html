@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Viagem de Maru!11!!</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="bolo_favicon_cortado.png">
+
+    <style>
+        /* =========================================================
+           PAINT WINDOWS 95
+        ========================================================= */
+
+        .paint-popup {
+            display: block;
+            position: fixed;
+            top: 30%;
+            right: 10%;
+            width: 400px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: 4px 4px 0 black;
+            z-index: 80;
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+        }
+
+        .paint-barra {
+            height: 22px;
+            background: #000080;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding-left: 5px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .paint-barra span {
+            flex: 1;
+        }
+
+        .paint-barra button {
+            width: 20px;
+            height: 18px;
+            padding: 0;
+            margin-right: 2px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            font-weight: bold;
+            cursor: default;
+        }
+
+        .paint-area {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: white;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .paint-ferramentas {
+            width: 42px;
+            height: 100%;
+            background: #c0c0c0;
+            border-right: 2px solid #808080;
+            box-sizing: border-box;
+            padding: 3px;
+            display: grid;
+            grid-template-columns: repeat(2, 18px);
+            grid-auto-rows: 18px;
+            gap: 3px;
+        }
+
+        .ferramenta {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            box-sizing: border-box;
+            background: #c0c0c0;
+            border: 1px solid #808080;
+            font-size: 13px;
+            line-height: 16px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .ferramenta:hover {
+            background: #dcdcdc;
+        }
+
+        .ferramenta.ativa {
+            border-top-color: #404040;
+            border-left-color: #404040;
+            border-right-color: white;
+            border-bottom-color: white;
+            background: #a0a0a0;
+        }
+
+        .paint-desenho {
+            position: relative;
+            flex: 1;
+            height: 100%;
+            background: white;
+            overflow: hidden;
+        }
+
+        #imagem-paint {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+        }
+
+        .paint-paleta {
+            height: 40px;
+            background: #c0c0c0;
+            border-top: 2px solid #808080;
+            padding: 4px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+        }
+
+        .cores {
+            display: grid;
+            grid-template-columns: repeat(14, 16px);
+            grid-template-rows: repeat(2, 16px);
+            gap: 1px;
+        }
+
+        .cores span {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .cores span:hover {
+            outline: 1px solid white;
+        }
+
+        /* =========================================================
+           BALÕES DOS ÍCONES
+        ========================================================= */
+
+        .balao-minecraft,
+        .balao-roblox,
+        .balao-lixeira {
+            display: none;
+            position: absolute;
+            width: 200px;
+            padding: 8px 10px;
+            box-sizing: border-box;
+            background: #ffffe1;
+            color: black;
+            border: 1px solid black;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            font-size: 11px;
+            line-height: 1.4;
+            text-align: left;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        /* APARECE AO PASSAR O MOUSE */
+
+        .icone-minecraft:hover .balao-minecraft,
+        .icone-roblox:hover .balao-roblox,
+        .icone-lixeira:hover .balao-lixeira {
+            display: block;
+        }
+
+        /* APARECE PELO JAVASCRIPT */
+
+        .balao-minecraft.manifestar,
+        .balao-roblox.manifestar,
+        .balao-lixeira.manifestar {
+            display: block !important;
+        }
+
+        /* ÍCONE SOBE ACIMA DO PAINT QUANDO SE MANIFESTA */
+
+        .icone-minecraft.manifestando,
+        .icone-roblox.manifestando,
+        .icone-lixeira.manifestando {
+            z-index: 95;
+        }
+
+        /* =========================================================
+           MINECRAFT
+        ========================================================= */
+
+        .icone-minecraft {
+            position: fixed;
+            top: 15%;
+            left: 5%;
+            z-index: 5;
+            text-align: center;
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            color: white;
+            cursor: pointer;
+        }
+
+        .icone-minecraft img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+
+        .icone-minecraft .icone-nome {
+            margin-top: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .icone-minecraft .balao-minecraft {
+            position: absolute;
+            left: 60px;
+            top: 0;
+        }
+
+        /* =========================================================
+           ROBLOX
+        ========================================================= */
+
+        .icone-roblox {
+            position: fixed;
+            top: 30%;
+            left: 5%;
+            z-index: 5;
+            text-align: center;
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            color: white;
+            cursor: pointer;
+        }
+
+        .icone-roblox img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+
+        .icone-roblox .icone-nome {
+            margin-top: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .icone-roblox .balao-roblox {
+            position: absolute;
+            left: 60px;
+            top: 0px;
+        }
+
+        /* =========================================================
+           LIXEIRA
+        ========================================================= */
+
+        .icone-lixeira {
+            position: fixed;
+            bottom: 4%;
+            left: 3%;
+            z-index: 5;
+            text-align: center;
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            color: white;
+            cursor: pointer;
+        }
+
+        .icone-lixeira img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+
+        .icone-lixeira .icone-nome {
+            margin-top: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .icone-lixeira .balao-lixeira {
+            position: absolute;
+            right: auto;
+            left: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+        }
+
+        /* =========================================================
+           BOBINOS
+        ========================================================= */
+
+        .bobinos-balao {
+            position: absolute !important;
+            left: calc(65% + 10px) !important;
+            top: 30% !important;
+            transform: translateY(-50%) !important;
+            width: 200px !important;
+            min-height: 30px;
+            padding: 10px 12px;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .bobinos-balao.piada {
+            display: block;
+        }
+
+        /* =========================================================
+           BARRA DO BOBINOS
+        ========================================================= */
+
+        .barra-bobinos {
+            height: 20px;
+            background: #000080;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3px;
+            font-weight: bold;
+        }
+
+        .barra-bobinos button {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            font-weight: bold;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+        }
+
+        .conteudo-bobinos {
+            padding: 20px;
+            text-align: center;
+        }
+
+        #piada-bobinos {
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            background: white;
+            border: 2px solid;
+            border-top-color: #404040;
+            border-left-color: #404040;
+            border-right-color: white;
+            border-bottom-color: white;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .conteudo-bobinos button {
+            padding: 5px 15px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .conteudo-bobinos button:active {
+            border-top-color: #404040;
+            border-left-color: #404040;
+            border-right-color: white;
+            border-bottom-color: white;
+        }
+
+        /* =========================================================
+           FECHAR OLHOS
+        ========================================================= */
+
+        #fechar-olhos {
+            position: fixed;
+            inset: 0;
+            background: black;
+            z-index: 100;
+            pointer-events: none;
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 1.2s ease-in-out;
+        }
+
+        #fechar-olhos.fechar {
+            clip-path: inset(0 0 0 0);
+        }
+
+        #fechar-olhos.abrir {
+            clip-path: inset(100% 0 0 0);
+        }
+
+        /* =========================================================
+           BIBLIOTECA DE MÚSICAS
+        ========================================================= */
+
+        .biblioteca-musicas {
+            display: none;
+            position: fixed;
+            width: 280px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: 4px 4px 0 black;
+            z-index: 90;
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            font-size: 11px;
+        }
+
+        .barra-biblioteca {
+            height: 20px;
+            background: #000080;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding-left: 5px;
+            font-weight: bold;
+        }
+
+        .barra-biblioteca span {
+            flex: 1;
+        }
+
+        .barra-biblioteca button {
+            width: 20px;
+            height: 18px;
+            padding: 0;
+            font-weight: bold;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+        }
+
+        .lista-musicas {
+            background: white;
+            margin: 8px;
+            border: 2px inset #808080;
+        }
+
+        .lista-musicas div {
+            padding: 7px;
+            cursor: pointer;
+        }
+
+        .lista-musicas div:hover {
+            background: #000080;
+            color: white;
+        }
+
+        /* =========================================================
+           PLAYER DE MÚSICA
+        ========================================================= */
+
+        .player-musica {
+            position: fixed;
+            top: 80px;
+            left: 90px;
+            width: 250px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: 3px 3px 0 black;
+            z-index: 15;
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            font-size: 11px;
+        }
+
+        .barra-janela {
+            height: 20px;
+            background: #000080;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding-left: 5px;
+            font-weight: bold;
+        }
+
+        .barra-janela span {
+            flex: 1;
+        }
+
+        .barra-janela button {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            margin-right: 2px;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            font-weight: bold;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+        }
+
+        .conteudo-player {
+            padding: 10px;
+            text-align: center;
+        }
+
+        #capa-atual {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            image-rendering: auto;
+            border: 2px inset #808080;
+        }
+
+        #nome-atual {
+            margin-top: 7px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        #artista-atual {
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .linha-player {
+            height: 4px;
+            background: #808080;
+            border: 1px inset white;
+            margin: 10px 0;
+        }
+
+        .botoes-player {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .botoes-player button {
+            min-width: 35px;
+            height: 25px;
+            margin: 2px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           ÍCONES DO DESKTOP
+        ========================================================= */
+
+        .imagem-icone {
+            width: 48px;
+            height: 48px;
+            image-rendering: pixelated;
+            object-fit: contain;
+        }
+
+        .icone-desktop {
+            position: fixed;
+            z-index: 5;
+            text-align: center;
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            color: white;
+            cursor: pointer;
+        }
+
+        .icone-imagem {
+            font-size: 45px;
+            text-shadow: 2px 2px 3px black;
+        }
+
+        .icone-nome {
+            margin-top: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .balao {
+            display: none;
+            position: absolute;
+            left: 55px;
+            top: 0;
+            width: 170px;
+            padding: 6px 8px;
+            background: #ffffe1;
+            color: black;
+            border: 1px solid #000;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+            font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+            font-size: 11px;
+            line-height: 1.3;
+            text-align: left;
+        }
+
+        .icone-desktop:hover .balao {
+            display: block;
+        }
+
+        /* =========================================================
+           POPUPS DA VIAGEM
+        ========================================================= */
+
+        .botao-ok,
+        .botao-cancel {
+            position: absolute;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .botao-ok {
+            width: 180px;
+            height: 55px;
+            bottom: 40px;
+            left: 100px;
+        }
+
+        .botao-cancel {
+            width: 180px;
+            height: 55px;
+            bottom: 40px;
+            right: 100px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 110;
+        }
+
+        .popup img {
+            width: 550px;
+            max-width: 90vw;
+        }
+
+        /* =========================================================
+           PÁGINA
+        ========================================================= */
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-image: url("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3M0eDluc3RlamxoemhkNGswOTlvdDJuZWh0OWRoZnlmbmJrNjZxciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KVnTd5nCNy47wPgpNh/giphy.gif");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* =========================================================
+           BOTÃO INICIAR
+        ========================================================= */
+
+        .area-botao {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .botao-win95 {
+            width: 300px;
+            height: 100px;
+            background-color: #c0c0c0;
+            color: black;
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            border: 4px solid;
+            border-top-color: white;
+            border-left-color: white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: 4px 4px 0 black;
+            cursor: pointer;
+        }
+
+        .botao-win95:hover {
+            background-color: #d0d0d0;
+        }
+
+        .botao-win95:active {
+            border-top-color: #404040;
+            border-left-color: #404040;
+            border-right-color: white;
+            border-bottom-color: white;
+            box-shadow: none;
+            transform: translate(4px, 4px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         ÍCONES DO DESKTOP
+    ========================================================= -->
+
+    <!-- MINECRAFT -->
+
+    <div
+        class="icone-minecraft"
+        style="top: 15%; right: 2%;"
+        onclick="manifestarIcone('.balao-minecraft', falasMinecraft)"
+    >
+        <img src="Minecraft_Icons.jpg">
+
+        <div class="icone-nome">
+            Minecraft.exe
+        </div>
+
+        <div class="balao-minecraft">
+            que cara chato esse do meu lado...
+        </div>
+    </div>
+
+    <!-- ROBLOX -->
+
+    <div
+        class="icone-roblox"
+        style="top: 15%; right: 40%;"
+        onclick="manifestarIcone('.balao-roblox', falasRoblox)"
+    >
+        <img src="91620173666721443.jpg">
+
+        <div class="icone-nome">
+            Roblox.exe
+        </div>
+
+        <div class="balao-roblox">
+            UHUUUUUUUUL, SABE QUUE DIA É HOJE?
+        </div>
+    </div>
+
+    <!-- LIXEIRA -->
+
+    <div
+        class="icone-lixeira"
+        style="bottom: 4%; left: 55%;"
+        onclick="manifestarIcone('.balao-lixeira', falasLixeira)"
+    >
+        <img src="_%EF%B8%8F-removebg-preview.png">
+
+        <div class="icone-nome">
+            LIXEIRA
+        </div>
+
+        <div class="balao-lixeira">
+            talvez seja melhor não olhar o que tem aqui...
+        </div>
+    </div>
+
+    <!-- MEMÓRIAS -->
+
+    <div
+        class="icone-desktop"
+        style="bottom: 15%; left: 8%;"
+    >
+        <img src="icone_memorias_cortado.png" class="imagem-icone">
+
+        <div class="icone-nome">
+            MEMÓRIAS
+        </div>
+
+        <div class="balao">
+            espero que esse lugar te remeta boas lembranças e bons lugares
+        </div>
+    </div>
+
+    <!-- MÚSICAS -->
+
+    <div
+        class="icone-desktop icone-musicas"
+        style="top: 15%; right: 18%;"
+        onclick="abrirBiblioteca()"
+    >
+        <img src="icone_cd_cortado.png" class="imagem-icone">
+
+        <div class="icone-nome">
+            MÚSICAS
+        </div>
+
+        <div class="balao">
+            escolher outra música...
+        </div>
+    </div>
+
+    <!-- =========================================================
+         BIBLIOTECA
+    ========================================================= -->
+
+    <div
+        id="biblioteca-musicas"
+        class="biblioteca-musicas"
+    >
+        <div class="barra-biblioteca">
+            <span>
+                Music Library
+            </span>
+
+            <button onclick="fecharBiblioteca()">
+                X
+            </button>
+        </div>
+
+        <div class="lista-musicas">
+            <div onclick="escolherMusica(0)">
+                🎵 Música 1
+            </div>
+
+            <div onclick="escolherMusica(1)">
+                🎵 Música 2
+            </div>
+
+            <div onclick="escolherMusica(2)">
+                🎵 Música 3
+            </div>
+        </div>
+    </div>
+
+    <!-- VOCÊ -->
+
+    <div
+        class="icone-desktop"
+        style="bottom: 10%; right: 15%;"
+    >
+        <img src="icone_tv_cortado.png" class="imagem-icone">
+
+        <div class="icone-nome">
+            VOCÊ
+        </div>
+
+        <div class="balao">
+            Marcelo (vulgo meu Mister Gyro Macroscópico Otaviano Docinho que eu amo mais que tudo)
+        </div>
+    </div>
+
+    <!-- BOBINOS -->
+
+    <div
+        class="icone-desktop bobinos-icone"
+        style="bottom: 15%; left: 30%;"
+        onclick="gerarPiadaBobinos()"
+    >
+        <img src="Hehh.jpg" class="imagem-icone">
+
+        <div class="icone-nome">
+            BOBINOS.FELIZIZES.EXE
+        </div>
+
+        <div class="balao bobinos-balao">
+            vem aqui! clica em mim pra ver uma coisa
+        </div>
+    </div>
+
+    <!-- =========================================================
+         BOTÃO
+    ========================================================= -->
+
+    <div class="area-botao">
+        <button
+            class="botao-win95"
+            onclick="abrirPopup()"
+        >
+            Iniciar viagem :)
+        </button>
+    </div>
+
+    <!-- =========================================================
+         POPUP 1
+    ========================================================= -->
+
+    <div id="popup1" class="popup">
+
+        <img
+            src="Untitled%20project%20(35).jpg"
+            alt="Mensagem"
+        >
+
+        <button
+            class="botao-ok"
+            onclick="proximoPopup(1)"
+        ></button>
+
+        <button
+            class="botao-cancel"
+            onclick="proximoPopup(1)"
+        ></button>
+
+    </div>
+
+    <!-- =========================================================
+         POPUP 2
+    ========================================================= -->
+
+    <div id="popup2" class="popup">
+
+        <img
+            src="Untitled%20project%20(34).jpg"
+            alt="Mensagem"
+        >
+
+        <button
+            class="botao-ok"
+            onclick="proximoPopup(2)"
+        ></button>
+
+        <button
+            class="botao-cancel"
+            onclick="proximoPopup(2)"
+        ></button>
+
+    </div>
+
+    <!-- =========================================================
+         POPUP 3
+    ========================================================= -->
+
+    <div id="popup3" class="popup">
+
+        <img
+            src="Untitled%20project%20(33).jpg"
+            alt="Mensagem"
+        >
+
+        <button
+            class="botao-ok"
+            onclick="proximoPopup(3)"
+        ></button>
+
+        <button
+            class="botao-cancel"
+            onclick="proximoPopup(3)"
+        ></button>
+
+    </div>
+
+    <!-- =========================================================
+         POPUP 4
+    ========================================================= -->
+
+    <div id="popup4" class="popup">
+
+        <img
+            src="Untitled%20project%20(37).jpg"
+            alt="Mensagem"
+        >
+
+        <button
+            class="botao-ok"
+            onclick="proximoPopup(4)"
+        ></button>
+
+        <button
+            class="botao-cancel"
+            onclick="proximoPopup(4)"
+        ></button>
+
+    </div>
+
+    <!-- =========================================================
+         POPUP 5
+    ========================================================= -->
+
+    <div id="popup5" class="popup">
+
+        <img
+            src="Untitled%20project%20(36).jpg"
+            alt="Mensagem"
+        >
+
+        <button
+            class="botao-ok"
+            onclick="finalizarViagem()"
+        ></button>
+
+        <button
+            class="botao-cancel"
+            onclick="finalizarViagem()"
+        ></button>
+
+    </div>
+
+    <!-- =========================================================
+         FECHAR OLHOS
+    ========================================================= -->
+
+    <div id="fechar-olhos"></div>
+
+    <!-- =========================================================
+         ÁUDIO
+    ========================================================= -->
+
+    <audio id="audio-musica"></audio>
+
+    <!-- =========================================================
+         PAINT
+    ========================================================= -->
+
+    <div
+        id="paint-popup"
+        class="paint-popup"
+    >
+
+        <div class="paint-barra">
+
+            <span>
+                untitled - Paint
+            </span>
+
+            <button>
+                X
+            </button>
+
+        </div>
+
+        <div class="paint-area">
+
+            <div class="paint-ferramentas">
+
+                <button
+                    class="ferramenta ativa"
+                    title="Lápis"
+                >
+                    ✎
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Borracha"
+                >
+                    ⌫
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Preencher"
+                >
+                    ▣
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Conta-gotas"
+                >
+                    💧
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Lupa"
+                >
+                    🔍
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Pincel"
+                >
+                    🖌
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Linha"
+                >
+                    ╱
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Curva"
+                >
+                    〰
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Retângulo"
+                >
+                    □
+                </button>
+
+                <button
+                    class="ferramenta"
+                    title="Elipse"
+                >
+                    ○
+                </button>
+
+            </div>
+
+            <div class="paint-desenho">
+
+                <img
+                    id="imagem-paint"
+                    src="Arbiter720%20-%20Hobbyist,%20Digital%20Artist%20_%20DeviantArt.jpg"
+                    alt="Desenho no Paint"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="paint-paleta">
+
+            <div class="cores">
+
+                <span onclick="mudarPaint(0)" style="background:#000000"></span>
+                <span onclick="mudarPaint(1)" style="background:#808080"></span>
+                <span onclick="mudarPaint(2)" style="background:#800000"></span>
+                <span onclick="mudarPaint(3)" style="background:#ff0000"></span>
+                <span onclick="mudarPaint(4)" style="background:#808000"></span>
+                <span onclick="mudarPaint(5)" style="background:#ffff00"></span>
+                <span onclick="mudarPaint(6)" style="background:#008000"></span>
+                <span onclick="mudarPaint(7)" style="background:#00ff00"></span>
+                <span onclick="mudarPaint(8)" style="background:#008080"></span>
+                <span onclick="mudarPaint(9)" style="background:#00ffff"></span>
+                <span onclick="mudarPaint(10)" style="background:#000080"></span>
+                <span onclick="mudarPaint(11)" style="background:#0000ff"></span>
+                <span onclick="mudarPaint(12)" style="background:#800080"></span>
+                <span onclick="mudarPaint(13)" style="background:#ff00ff"></span>
+                <span onclick="mudarPaint(14)" style="background:#404040"></span>
+                <span onclick="mudarPaint(15)" style="background:#c0c0c0"></span>
+                <span onclick="mudarPaint(16)" style="background:#804040"></span>
+                <span onclick="mudarPaint(17)" style="background:#ff8080"></span>
+                <span onclick="mudarPaint(18)" style="background:#808040"></span>
+                <span onclick="mudarPaint(19)" style="background:#ffff80"></span>
+                <span onclick="mudarPaint(20)" style="background:#408040"></span>
+                <span onclick="mudarPaint(21)" style="background:#80ff80"></span>
+                <span onclick="mudarPaint(22)" style="background:#408080"></span>
+                <span onclick="mudarPaint(23)" style="background:#80ffff"></span>
+                <span onclick="mudarPaint(24)" style="background:#404080"></span>
+                <span onclick="mudarPaint(25)" style="background:#8080ff"></span>
+                <span onclick="mudarPaint(26)" style="background:#804080"></span>
+                <span onclick="mudarPaint(27)" style="background:#ff80ff"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* =========================================================
+           IMAGENS DO PAINT
+        ========================================================= */
+
+        const imagensPaint = [
+            "paint1.png",
+            "paint2.png",
+            "paint3.png",
+            "paint4.png",
+            "paint5.png",
+            "paint6.png",
+            "paint7.png",
+            "paint8.png",
+            "paint9.png",
+            "paint10.png",
+            "paint11.png",
+            "paint12.png",
+            "paint13.png",
+            "paint14.png",
+            "paint15.png",
+            "paint16.png",
+            "paint17.png",
+            "paint18.png",
+            "paint19.png",
+            "paint20.png",
+            "paint21.png",
+            "paint22.png",
+            "paint23.png",
+            "paint24.png",
+            "paint25.png",
+            "paint26.png",
+            "paint27.png",
+            "paint28.png"
+        ];
+
+        function mudarPaint(numero) {
+
+            document
+                .getElementById("imagem-paint")
+                .src = imagensPaint[numero];
+
+        }
+
+        function abrirPaint() {
+
+            document
+                .getElementById("paint-popup")
+                .style.display = "block";
+
+        }
+
+        function fecharPaint() {
+            return;
+        }
+
+        /* =========================================================
+           BOBINOS
+        ========================================================= */
+
+        const piadasBobinos = [
+            "os tais genes fluminenses e atalaianos se colidiram",
+            "*comendo seu celebo* abulelele",
+            "você é SIM um sonho de doce de leite (que vai pra escola e me beija na boca)",
+            "SÓ SE FOR NA ÚLTIMA SESSÃO SEM NINGUÉM!",
+            "MARCELO, VOCÊ VAI ACORDAR COM A BARRIGA CHEIA DE MORDIDA"
+        ];
+
+        const frasesBobinos = [
+            "lero lero lero",
+            "olha eu aqui!!!",
+            "VEM ME OUVIR",
+            "hehehe",
+            "quanto estilo!",
+            "eu fazo piadas >:)",
+            "ridiculinho aí do outro lado da tela! sim, você!",
+            "alô???",
+            "TENHO PIADOCAS ÓTIMAS",
+            "BLEEEEEH"
+        ];
+
+        function manifestarBobinos() {
+
+            const balao = document.querySelector(".bobinos-balao");
+
+            const numero = Math.floor(
+                Math.random() * frasesBobinos.length
+            );
+
+            balao.textContent = frasesBobinos[numero];
+
+            balao.classList.add("piada");
+
+            setTimeout(function() {
+
+                balao.classList.remove("piada");
+
+            }, 4000);
+
+        }
+
+        setInterval(
+            manifestarBobinos,
+            15000
+        );
+
+        function gerarPiadaBobinos() {
+
+            const balao =
+                document.querySelector(".bobinos-balao");
+
+            const numero = Math.floor(
+                Math.random() * piadasBobinos.length
+            );
+
+            balao.textContent =
+                piadasBobinos[numero];
+
+            balao.classList.add("piada");
+
+            setTimeout(function() {
+
+                balao.classList.remove("piada");
+
+            }, 5000);
+
+        }
+
+        /* =========================================================
+           FALAS DOS ÍCONES
+        ========================================================= */
+
+        const falasMinecraft = [
+            "lembra quando a gente passava horas jogando Minecraft?",
+            "quantas casas horríveis a gente já fez aqui?",
+            "EU TENHO DIAMANTE!!!",
+            "pera... onde foi parar minha picareta?",
+            "Minecraft.exe ainda está funcionando...",
+            "olha o creeper ali atrás.",
+            "não olha meu mundo antigo.",
+            "quantas horas foram perdidas aqui mesmo?",
+            "acho que eu ainda tenho uma espada de madeira.",
+            "VAMO JOGAR???"
+        ];
+
+        const falasRoblox = [
+            "quantas horas foram perdidas aqui mesmo?",
+            "qual era aquele jogo mesmo???",
+            "ROBLOX.EXE INICIADO",
+            "eu lembro desse mapa...",
+            "por que a gente jogava isso por TANTAS HORAS?",
+            "AAAAA EU LEMBRO DISSO",
+            "hora de entrar em um servidor aleatório.",
+            "clássico.",
+            "isso aqui tem história.",
+            "eu ainda sei jogar isso >:)"
+        ];
+
+        const falasLixeira = [
+            "talvez seja melhor não olhar o que tem aqui...",
+            "você não viu nada.",
+            "não abre.",
+            "sério.",
+            "tem coisa aí que devia ter sido apagada.",
+            "🗑️",
+            "por que você está olhando pra mim?",
+            "isso aqui é território proibido.",
+            "arquivo confidencial.",
+            "NÃO CLICA EM MIM."
+        ];
+
+        /* =========================================================
+           MANIFESTAÇÃO DOS ÍCONES
+        ========================================================= */
+
+        function manifestarIcone(classe, falas) {
+
+            const balao =
+                document.querySelector(classe);
+
+            if (!balao) {
+                return;
+            }
+
+            const numero = Math.floor(
+                Math.random() * falas.length
+            );
+
+            balao.textContent =
+                falas[numero];
+
+            balao.classList.add("manifestar");
+
+            const icone =
+                balao.parentElement;
+
+            icone.classList.add("manifestando");
+
+            setTimeout(function() {
+
+                balao.classList.remove("manifestar");
+
+                icone.classList.remove("manifestando");
+
+            }, 4000);
+
+        }
+
+        /* =========================================================
+           MANIFESTAÇÕES AUTOMÁTICAS
+        ========================================================= */
+
+        setInterval(function() {
+
+            manifestarIcone(
+                ".balao-minecraft",
+                falasMinecraft
+            );
+
+        }, 17000);
+
+        setInterval(function() {
+
+            manifestarIcone(
+                ".balao-roblox",
+                falasRoblox
+            );
+
+        }, 22000);
+
+        setInterval(function() {
+
+            manifestarIcone(
+                ".balao-lixeira",
+                falasLixeira
+            );
+
+        }, 26000);
+
+        /* =========================================================
+           FINALIZAR VIAGEM
+        ========================================================= */
+
+        function finalizarViagem() {
+
+            document
+                .getElementById("popup5")
+                .style.display = "none";
+
+            const olhos =
+                document.getElementById("fechar-olhos");
+
+            olhos.classList.add("fechar");
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "viagem.html";
+
+            }, 1500);
+
+        }
+
+        /* =========================================================
+           PLAYER
+        ========================================================= */
+
+        function minimizarPlayer() {
+
+            document
+                .querySelector(".conteudo-player")
+                .style.display = "none";
+
+        }
+
+        function tocarMusica() {
+            audio.play();
+        }
+
+        function pausarMusica() {
+            audio.pause();
+        }
+
+        function proximaMusica() {
+
+            musicaAtual++;
+
+            if (
+                musicaAtual >= musicas.length
+            ) {
+                musicaAtual = 0;
+            }
+
+            escolherMusica(musicaAtual);
+
+        }
+
+        function musicaAnterior() {
+
+            musicaAtual--;
+
+            if (musicaAtual < 0) {
+
+                musicaAtual =
+                    musicas.length - 1;
+
+            }
+
+            escolherMusica(musicaAtual);
+
+        }
+
+        function escolherMusica(numero) {
+
+            musicaAtual = numero;
+
+            audio.src =
+                musicas[numero].arquivo;
+
+            document
+                .getElementById("capa-atual")
+                .src =
+                musicas[numero].capa;
+
+            document
+                .getElementById("nome-atual")
+                .textContent =
+                musicas[numero].nome;
+
+            document
+                .getElementById("artista-atual")
+                .textContent =
+                musicas[numero].artista;
+
+            audio.play();
+
+            fecharBiblioteca();
+
+        }
+
+        const musicas = [
+
+            {
+                nome: "Música 1",
+                artista: "Artista 1",
+                arquivo: "musica1.mp3",
+                capa: "capa1.jpg"
+            },
+
+            {
+                nome: "Música 2",
+                artista: "Artista 2",
+                arquivo: "musica2.mp3",
+                capa: "capa2.jpg"
+            },
+
+            {
+                nome: "Música 3",
+                artista: "Artista 3",
+                arquivo: "musica3.mp3",
+                capa: "capa3.jpg"
+            }
+
+        ];
+
+        let musicaAtual = 0;
+
+        const audio =
+            document.getElementById("audio-musica");
+
+        /* =========================================================
+           BIBLIOTECA
+        ========================================================= */
+
+        function abrirBiblioteca() {
+
+            const icone =
+                document.querySelector(".icone-musicas");
+
+            const biblioteca =
+                document.getElementById(
+                    "biblioteca-musicas"
+                );
+
+            const posicao =
+                icone.getBoundingClientRect();
+
+            biblioteca.style.display =
+                "block";
+
+            biblioteca.style.top =
+                (posicao.bottom + 10) + "px";
+
+            biblioteca.style.left =
+                posicao.left + "px";
+
+        }
+
+        function fecharBiblioteca() {
+
+            document
+                .getElementById("biblioteca-musicas")
+                .style.display = "none";
+
+        }
+
+        /* =========================================================
+           POPUPS
+        ========================================================= */
+
+        function abrirPopup() {
+
+            document
+                .getElementById("popup1")
+                .style.display = "block";
+
+        }
+
+        function proximoPopup(numeroAtual) {
+
+            document
+                .getElementById("popup" + numeroAtual)
+                .style.display = "none";
+
+            if (numeroAtual < 5) {
+
+                document
+                    .getElementById(
+                        "popup" + (numeroAtual + 1)
+                    )
+                    .style.display = "block";
+
+            }
+
+        }
+
+    </script>
+
+    <!-- =========================================================
+         PLAYER DE MÚSICA
+    ========================================================= -->
+
+    <div
+        id="player-musica"
+        class="player-musica"
+    >
+
+        <div class="barra-janela">
+
+            <span>
+                ♫ Maru Media Player
+            </span>
+
+        </div>
+
+        <img
+            id="capa-atual"
+            src="capa1.jpg"
+        >
+
+        <div id="nome-atual">
+            Música 1
+        </div>
+
+        <div id="artista-atual">
+            Artista
+        </div>
+
+        <div class="linha-player"></div>
+
+        <div class="botoes-player">
+
+            <button onclick="musicaAnterior()">
+                ◀◀
+            </button>
+
+            <button onclick="tocarMusica()">
+                ▶
+            </button>
+
+            <button onclick="pausarMusica()">
+                | |
+            </button>
+
+            <button onclick="proximaMusica()">
+                ▶▶
+            </button>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
