@@ -1616,30 +1616,25 @@
 
         }
 
-        function proximoPopup(numeroAtual) {
+       
+function proximoPopup(numeroAtual) {
 
-            document
-                .getElementById("popup" + numeroAtual)
-                .style.display = "none";
+    document
+        .getElementById("popup" + numeroAtual)
+        .style.display = "none";
 
-            if (numeroAtual < 5) {
+    if (numeroAtual < 5) {
 
-                document
-                    .getElementById(
-                        "popup" + (numeroAtual + 1)
-                    )
-                    .style.display = "block";
+        document
+            .getElementById("popup" + (numeroAtual + 1))
+            .style.display = "block";
 
-        }
-        window.addEventListener("load", function() {
-    musicaAtual = 0;
+    }
 
-    audio.src = musicas[0].arquivo;
-
-    document.getElementById("capa-atual").src = musicas[0].capa;
-    document.getElementById("nome-atual").textContent = musicas[0].nome;
-    document.getElementById("artista-atual").textContent = musicas[0].artista;
 }
+
+
+// PREPARAR A PRIMEIRA MÚSICA AO ABRIR O SITE
 
 window.addEventListener("load", function() {
 
@@ -1655,6 +1650,9 @@ window.addEventListener("load", function() {
 
 });
 
+
+// COMEÇAR A TOCAR NO PRIMEIRO CLIQUE DO VISITANTE
+
 document.addEventListener("pointerdown", function() {
 
     audio.play().catch(function(erro) {
@@ -1662,6 +1660,7 @@ document.addEventListener("pointerdown", function() {
     });
 
 }, { once: true });
+
 
     </script>
 
