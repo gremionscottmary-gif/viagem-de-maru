@@ -228,16 +228,21 @@
             font-weight: bold;
             text-shadow: 1px 1px 2px black;
         }
-.icone-minecraft .balao-minecraft,
-.icone-roblox .balao-roblox {
+.icone-minecraft .balao-minecraft {
     position: absolute !important;
-
     left: auto !important;
     right: 60px !important;
-
     top: 30% !important;
     transform: translateY(-50%) !important;
+    width: 200px !important;
+}
 
+.icone-roblox .balao-roblox {
+    position: absolute !important;
+    left: auto !important;
+    right: 60px !important;
+    top: 30% !important;
+    transform: translateY(-50%) !important;
     width: 200px !important;
 }
         /* =========================================================
@@ -752,7 +757,7 @@
 
     <div
         class="icone-minecraft"
-        style="top: 15%; right: 2%;"
+        style="top: 15%; left: 30%; right: auto;"
         onclick="manifestarIcone('.balao-minecraft', falasMinecraft)"
     >
         <img src="Minecraft_Icons.jpg">
