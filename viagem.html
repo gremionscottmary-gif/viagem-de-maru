@@ -1,10 +1,11 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Seu trajeto :P</title>
     <meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/png" href="56224695344760420-removebg-preview.png">
+    <link rel="icon" type="image/png" href="56224695344760420-removebg-preview.png">
 
     <style>
         html, body {
@@ -18,27 +19,36 @@
             background: black;
         }
 
+        .cena {
+            position: fixed;
+            inset: 0;
+            background-image: url("385739_jpg (3840×2160).jpg");
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .estrada {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 1;
+            pointer-events: none;
+        }
+
         #abrir-olhos {
             position: fixed;
             inset: 0;
             background: black;
             z-index: 100;
-
             clip-path: inset(0 0 0 0);
-
             transition: clip-path 1.5s ease-in-out;
         }
 
         #abrir-olhos.aberto {
             clip-path: inset(0 0 100% 0);
-        }
-
-        .cena {
-            width: 100%;
-            height: 100%;
-            background-image: url("385739_jpg (3840×2160).jpg");
-            background-size: cover;
-            background-position: center;
         }
     </style>
 </head>
@@ -46,7 +56,8 @@
 <body>
 
     <div class="cena"></div>
-  <img src="estrada.png" class="estrada" alt="">
+
+    <img src="estrada.png" class="estrada" alt="">
 
     <div id="abrir-olhos"></div>
 
@@ -54,19 +65,7 @@
         setTimeout(function() {
             document.getElementById("abrir-olhos").classList.add("aberto");
         }, 300);
-      .estrada {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    inset: 0;
-    object-fit: fill;
-    z-index: 1;
-    pointer-events: none;
-}
     </script>
 
 </body>
-</html>
-   
-  </body>
 </html>
