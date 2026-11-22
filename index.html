@@ -1639,12 +1639,28 @@
     document.getElementById("capa-atual").src = musicas[0].capa;
     document.getElementById("nome-atual").textContent = musicas[0].nome;
     document.getElementById("artista-atual").textContent = musicas[0].artista;
+}
+
+window.addEventListener("load", function() {
+
+    musicaAtual = 0;
+
+    audio.src = musicas[0].arquivo;
+
+    document.getElementById("capa-atual").src = musicas[0].capa;
+    document.getElementById("nome-atual").textContent = musicas[0].nome;
+    document.getElementById("artista-atual").textContent = musicas[0].artista;
+
+    audio.load();
+
 });
 
 document.addEventListener("pointerdown", function() {
+
     audio.play().catch(function(erro) {
         console.log("Não foi possível iniciar a música:", erro);
     });
+
 }, { once: true });
 
     </script>
