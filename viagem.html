@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,6 @@
         }
 
         #abrir-olhos {
-            display: none;
             position: fixed;
             inset: 0;
             background: black;
@@ -51,6 +51,109 @@
         #abrir-olhos.aberto {
             clip-path: inset(0 0 100% 0);
         }
+
+        /* ÍCONES DA VIAGEM */
+
+        .objeto {
+            position: fixed;
+            z-index: 2;
+            cursor: pointer;
+            animation: movimento-colagem 1.2s steps(1, end) infinite;
+        }
+
+        .objeto img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.2s ease;
+        }
+
+        @keyframes movimento-colagem {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            20% {
+                transform: translate(3px, -2px) rotate(1deg);
+            }
+
+            40% {
+                transform: translate(-2px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(2px, 1px) rotate(0.5deg);
+            }
+
+            80% {
+                transform: translate(-3px, -1px) rotate(-0.5deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+        .objeto:hover {
+            animation-play-state: paused;
+            z-index: 10;
+        }
+
+        .objeto:hover img {
+            transform: scale(1.12);
+        }
+
+        /* POSIÇÕES DOS OBJETOS */
+
+        .carro {
+            top: 24%;
+            left: 0%;
+            width: 19vw;
+            animation-delay: 0s;
+        }
+
+        .carro img {
+            transform: rotate(90deg);
+        }
+
+        .carro:hover img {
+            transform: rotate(90deg) scale(1.12);
+        }
+
+        .loja {
+            top: 5%;
+            left: 23%;
+            width: 23vw;
+            animation-delay: 0.3s;
+        }
+
+        .notebook {
+            top: 6%;
+            left: 66%;
+            width: 18vw;
+            animation-delay: 0.6s;
+        }
+
+        .album {
+            top: 59%;
+            left: 0%;
+            width: 17vw;
+            animation-delay: 0.2s;
+        }
+
+        .mochila {
+            top: 58%;
+            left: 40%;
+            width: 18vw;
+            animation-delay: 0.5s;
+        }
+
+        .calendario {
+            top: 54%;
+            left: 80%;
+            width: 16vw;
+            animation-delay: 0.8s;
+        }
     </style>
 </head>
 
@@ -60,156 +163,42 @@
 
     <img src="estrada.png" class="estrada" alt="">
 
+    <!-- CARRO -->
+    <div class="objeto carro">
+        <img src="carro-removebg-preview.png" alt="Carro">
+    </div>
+
+    <!-- LOJA DE CONVENIÊNCIA -->
+    <div class="objeto loja">
+        <img src="Conveniência_24h_em_Pixel_Art-removebg-preview.png" alt="Loja">
+    </div>
+
+    <!-- NOTEBOOK -->
+    <div class="objeto notebook">
+        <img src="notebook-removebg-preview.png" alt="Notebook">
+    </div>
+
+    <!-- ÁLBUM -->
+    <div class="objeto album">
+        <img src="livro-removebg-preview.png" alt="Álbum">
+    </div>
+
+    <!-- MOCHILA -->
+    <div class="objeto mochila">
+        <img src="mochila-removebg-preview.png" alt="Mochila">
+    </div>
+
+    <!-- CALENDÁRIO -->
+    <div class="objeto calendario">
+        <img src="Calendario-removebg-preview.png" alt="Calendário">
+    </div>
+
     <div id="abrir-olhos"></div>
 
     <script>
         setTimeout(function() {
             document.getElementById("abrir-olhos").classList.add("aberto");
         }, 300);
-        
-<!-- CARRO -->
-<div class="objeto carro">
-    <img src="carro-removebg-preview.png" alt="Carro">
-</div>
-
-<!-- LOJA DE CONVENIÊNCIA -->
-<div class="objeto loja">
-    <img src="Conveniência_24h_em_Pixel_Art-removebg-preview.png" alt="Loja">
-</div>
-
-<!-- NOTEBOOK -->
-<div class="objeto notebook">
-    <img src="notebook-removebg-preview.png" alt="Notebook">
-</div>
-
-<!-- ÁLBUM -->
-<div class="objeto album">
-    <img src="livro-removebg-preview.png" alt="Álbum">
-</div>
-
-<!-- MOCHILA -->
-<div class="objeto mochila">
-    <img src="mochila-removebg-preview.png" alt="Mochila">
-</div>
-
-<!-- CALENDÁRIO -->
-<div class="objeto calendario">
-    <img src="Calendario-removebg-preview.png" alt="Calendário">
-</div>
-
-        
-/* ÍCONES DA VIAGEM */
-
-.objeto {
-    position: fixed;
-    z-index: 2;
-    cursor: pointer;
-    animation: movimento-colagem 1.2s steps(1, end) infinite;
-}
-
-.objeto img {
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: transform 0.2s ease;
-}
-
-/* Movimento irregular, como recortes de papel */
-
-@keyframes movimento-colagem {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-
-    20% {
-        transform: translate(3px, -2px) rotate(1deg);
-    }
-
-    40% {
-        transform: translate(-2px, 2px) rotate(-1deg);
-    }
-
-    60% {
-        transform: translate(2px, 1px) rotate(0.5deg);
-    }
-
-    80% {
-        transform: translate(-3px, -1px) rotate(-0.5deg);
-    }
-
-    100% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-}
-
-/* Ao passar o mouse, o objeto para */
-
-.objeto:hover {
-    animation-play-state: paused;
-    z-index: 10;
-}
-
-/* E aumenta de tamanho */
-
-.objeto:hover img {
-    transform: scale(1.12);
-}
-
-
-/* POSIÇÕES DOS OBJETOS */
-
-.carro {
-    top: 24%;
-    left: 0%;
-    width: 19vw;
-    animation-delay: 0s;
-    
-.carro img {
-    transform: rotate(90deg);
-}
-
-/* Mantém a rotação quando o mouse passa por cima */
-.carro:hover img {
-    transform: rotate(90deg) scale(1.12);
-}
-
-}
-
-.loja {
-    top: 5%;
-    left: 23%;
-    width: 23vw;
-    animation-delay: 0.3s;
-}
-
-.notebook {
-    top: 6%;
-    left: 66%;
-    width: 18vw;
-    animation-delay: 0.6s;
-}
-
-.album {
-    top: 59%;
-    left: 0%;
-    width: 17vw;
-    animation-delay: 0.2s;
-}
-
-.mochila {
-    top: 58%;
-    left: 40%;
-    width: 18vw;
-    animation-delay: 0.5s;
-}
-
-.calendario {
-    top: 54%;
-    left: 80%;
-    width: 16vw;
-    animation-delay: 0.8s;
-}
-
     </script>
 
 </body>
