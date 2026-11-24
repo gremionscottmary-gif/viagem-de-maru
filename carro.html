@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vivendo memórias...</title>
+    <title>Dentro do carro!</title>
 
     <style>
         * {
@@ -18,7 +17,7 @@
             overflow: hidden;
         }
 
-        /* FUNDO DO CARRO */
+        /* FUNDO */
 
         body {
             background-image: url("interior-carro.jpg");
@@ -36,7 +35,6 @@
             z-index: 10;
             width: 65px;
             height: 65px;
-            display: block;
         }
 
         .voltar img {
@@ -48,6 +46,167 @@
 
         .voltar:hover img {
             transform: scale(1.1);
+        }
+
+        /* OBJETOS DO CARRO */
+
+       .objeto {
+    position: absolute;
+    z-index: 2;
+    object-fit: contain;
+    cursor: pointer;
+    animation: movimento-colagem 1.2s steps(1, end) infinite;
+    transition: transform 0.2s ease;
+}
+
+.objeto:hover {
+    animation-play-state: paused;
+    transform: scale(1.12);
+    z-index: 10;
+}
+
+        /* POLAROIDS */
+
+        .polaroids {
+            position: absolute;
+            top: 28%;
+            left: 9%;
+            width: 44%;
+            height: 30%;
+            z-index: 3;
+        }
+
+        .polaroid {
+            position: absolute;
+            width: 55%;
+            height: 100%;
+            padding: 7px 7px 20px;
+            background: #eeeeeb;
+            box-shadow: 2px 3px 5px #0006;
+            transition: transform 0.25s ease;
+            cursor: pointer;
+        }
+        .polaroid {
+    animation: movimento-colagem 1.2s steps(1, end) infinite;
+    transition: transform 0.2s ease;
+}
+
+.polaroid:hover {
+    animation-play-state: paused;
+    z-index: 10;
+}
+
+        .polaroid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .polaroid:first-child {
+            left: 0;
+            top: 8%;
+            transform: rotate(-11deg);
+            z-index: 2;
+        }
+
+        .polaroid:last-child {
+            left: 42%;
+            top: -5%;
+            transform: rotate(10deg);
+            z-index: 1;
+        }
+        .polaroid:first-child {
+    animation-delay: 0s;
+}
+
+.polaroid:last-child {
+    animation-delay: 0.4s;
+}
+
+        .polaroid:first-child:hover {
+            transform: rotate(-5deg) scale(1.08);
+            z-index: 5;
+        }
+
+        .polaroid:last-child:hover {
+            transform: rotate(4deg) scale(1.08);
+            z-index: 5;
+        }
+
+        /* BISCOITO DOCE */
+
+        .biscoito-doce {
+            width: 25%;
+            top: 8%;
+            right: 14%;
+            transform: rotate(12deg);
+        }
+
+        .biscoito-doce:hover {
+            transform: rotate(12deg) scale(1.08);
+        }
+
+        /* BISCOITO SALGADO */
+
+        .biscoito-salgado {
+            width: 13%;
+            top: 17%;
+            right: 7%;
+            transform: rotate(14deg);
+        }
+
+        .biscoito-salgado:hover {
+            transform: rotate(14deg) scale(1.08);
+        }
+
+        /* GARRAFA D'ÁGUA */
+
+        .garrafa {
+            width: 13%;
+            top: 28%;
+            right: 25%;
+            transform: rotate(-8deg);
+        }
+
+        .garrafa:hover {
+            transform: rotate(-8deg) scale(1.08);
+        }
+
+        /* ALMOFADA */
+
+        .almofada {
+            width: 72%;
+            left: 9%;
+            bottom: 8%;
+        }
+
+        /* ADESIVOS */
+
+        .adesivo {
+            width: 9%;
+            z-index: 4;
+        }
+
+        .adesivo-1 {
+            top: 5%;
+            left: 5%;
+            transform: rotate(-12deg);
+        }
+
+        .adesivo-2 {
+            top: 57%;
+            right: 5%;
+            transform: rotate(12deg);
+        }
+
+        .adesivo-3 {
+            bottom: 5%;
+            right: 28%;
+            transform: rotate(-8deg);
+        }
+
+        .adesivo:hover {
+            transform: scale(1.2) rotate(0deg);
         }
 
         /* TELA DE CARREGAMENTO */
@@ -82,8 +241,6 @@
             font-size: 20px;
             margin-bottom: 12px;
         }
-
-        /* BARRINHA */
 
         .barra-fundo {
             position: relative;
@@ -150,19 +307,127 @@
                 opacity: 1;
             }
         }
+        @keyframes movimento-colagem {
+    0% {
+        translate: 0 0;
+    }
+
+    20% {
+        translate: 3px -2px;
+    }
+
+    40% {
+        translate: -2px 2px;
+    }
+
+    60% {
+        translate: 2px 1px;
+    }
+
+    80% {
+        translate: -3px -1px;
+    }
+
+    100% {
+        translate: 0 0;
+    }
+}
+        .biscoito-doce {
+    animation-delay: 0.2s;
+}
+
+.biscoito-salgado {
+    animation-delay: 0.5s;
+}
+
+.garrafa {
+    animation-delay: 0.8s;
+}
+
+.almofada {
+    animation-delay: 0.3s;
+}
+
+.adesivo-1 {
+    animation-delay: 0.6s;
+}
+
+.adesivo-2 {
+    animation-delay: 0.1s;
+}
+
+.adesivo-3 {
+    animation-delay: 0.9s;
+}
 
     </style>
 </head>
 
 <body>
 
-    <!-- SETA PARA VOLTAR À ESTRADA -->
+    <!-- SETA DE VOLTAR -->
 
     <a href="viagem.html" class="voltar">
         <img src="seta-voltar.png" alt="Voltar">
     </a>
 
-    <!-- TELA INICIAL -->
+    <!-- POLAROIDS -->
+
+    <div class="polaroids">
+
+        <div class="polaroid">
+            <img src="foto-polaroid-1.jpg" alt="Fotografia 1">
+        </div>
+
+        <div class="polaroid">
+            <img src="foto-polaroid-2.jpg" alt="Fotografia 2">
+        </div>
+
+    </div>
+
+    <!-- BISCOITO DOCE -->
+
+    <img
+        src="biscoito-doce.png"
+        class="objeto biscoito-doce"
+        alt="Biscoito doce"
+        title="Biscoito doce"
+    >
+
+    <!-- BISCOITO SALGADO -->
+
+    <img
+        src="biscoito-salgado.png"
+        class="objeto biscoito-salgado"
+        alt="Biscoito salgado"
+        title="Biscoito salgado"
+    >
+
+    <!-- GARRAFA -->
+
+    <img
+        src="garrafa.png"
+        class="objeto garrafa"
+        alt="Garrafa de água"
+        title="Garrafa de água"
+    >
+
+    <!-- ALMOFADA -->
+
+    <img
+        src="almofada.png"
+        class="objeto almofada"
+        alt="Almofada"
+        title="Almofada"
+    >
+
+    <!-- ADESIVOS -->
+
+    <img src="adesivo-1.png" class="objeto adesivo adesivo-1" alt="Adesivo">
+    <img src="adesivo-2.png" class="objeto adesivo adesivo-2" alt="Adesivo">
+    <img src="adesivo-3.png" class="objeto adesivo adesivo-3" alt="Adesivo">
+
+    <!-- TELA DE CARREGAMENTO -->
 
     <div id="transicao-inicial">
 
