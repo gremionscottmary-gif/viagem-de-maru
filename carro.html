@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vivendo memórias...</title>
-    <link rel="icon" type="image/png" href="598978819182472007-removebg-preview.png">
+    <link rel="icon" type="image/png" href="598978819182472007-removebg-preview.png?v=4">
 
     <style>
         * {
@@ -175,7 +175,7 @@
 
         /* ALMOFADA */
 
-     /* ÁREA DA ALMOFADA */
+   /* ÁREA DA ALMOFADA */
 
 .almofada-area {
     position: absolute;
@@ -199,49 +199,24 @@
     transition: transform 0.2s ease;
 }
 
-/* ÁREA QUE RECONHECE O MOUSE */
+/* ÁREA MENOR QUE DETECTA O MOUSE */
 
 .almofada-area::after {
     content: "";
     position: absolute;
     left: 15%;
-    top: 20%;
+    top: -35%;
     width: 70%;
-    height: 65%;
+    height: 100%;
     pointer-events: auto;
     cursor: pointer;
 }
 
-/* ÁREA QUE RECONHECE O MOUSE */
-
-.almofada-area {
-    position: absolute;
-    left: 18%;
-    bottom: -7%;
-    width: 55%;
-    height: 36%;
-    pointer-events: auto;
-    z-index: 2;
-}
-
-/* IMAGEM DA ALMOFADA */
-
-.almofada {
-    position: absolute;
-    width: 130%;
-    height: auto;
-    left: -14%;
-    bottom: -28;
-    pointer-events: none;
-    transition: transform 0.2s ease;
-}
-
-/* EFEITO AO PASSAR O MOUSE */
+/* EFEITO DE CRESCER */
 
 .almofada-area:hover .almofada {
     animation-play-state: paused;
     transform: scale(1.12);
-    z-index: 5;
 }
         /* ADESIVOS */
 
