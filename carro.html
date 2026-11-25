@@ -175,15 +175,19 @@
 
         /* ALMOFADA */
 
-      .almofada-area {
+     /* ÁREA DA ALMOFADA */
+
+.almofada-area {
     position: absolute;
     left: 9%;
-    bottom: 0%;
+    bottom: -7%;
     width: 72%;
     height: 30%;
     pointer-events: none;
     z-index: 2;
 }
+
+/* IMAGEM DA ALMOFADA */
 
 .almofada {
     position: absolute;
@@ -192,6 +196,27 @@
     left: 0;
     bottom: 0;
     pointer-events: none;
+    transition: transform 0.2s ease;
+}
+
+/* ÁREA QUE RECONHECE O MOUSE */
+
+.almofada-area::after {
+    content: "";
+    position: absolute;
+    left: 15%;
+    top: 20%;
+    width: 70%;
+    height: 65%;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* EFEITO DE CRESCER */
+
+.almofada-area:hover .almofada {
+    animation-play-state: paused;
+    transform: scale(1.12);
 }
 
 /* Área menor que reconhece o mouse */
