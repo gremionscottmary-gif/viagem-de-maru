@@ -212,32 +212,37 @@
     cursor: pointer;
 }
 
-/* EFEITO DE CRESCER */
+/* ÁREA QUE RECONHECE O MOUSE */
 
-.almofada-area:hover .almofada {
-    animation-play-state: paused;
-    transform: scale(1.12);
-}
-
-/* Área menor que reconhece o mouse */
-
-.almofada-area::after {
-    content: "";
+.almofada-area {
     position: absolute;
-    left: 20%;
-    top: 20%;
+    left: 18%;
+    bottom: -7%;
     width: 55%;
-    height: 65%;
+    height: 36%;
     pointer-events: auto;
-    cursor: pointer;
+    z-index: 2;
 }
+
+/* IMAGEM DA ALMOFADA */
+
+.almofada {
+    position: absolute;
+    width: 130%;
+    height: auto;
+    left: -14%;
+    bottom: 0;
+    pointer-events: none;
+    transition: transform 0.2s ease;
+}
+
+/* EFEITO AO PASSAR O MOUSE */
 
 .almofada-area:hover .almofada {
     animation-play-state: paused;
     transform: scale(1.12);
     z-index: 5;
 }
-
         /* ADESIVOS */
 
         .adesivo {
