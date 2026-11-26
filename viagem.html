@@ -24,10 +24,10 @@
             transform: translateX(-100%);
         }
 
-        #transicao-porta.abrindo {
-            display: block;
-            animation: abrirPorta 1.2s ease-in-out forwards;
-        }
+      #transicao-porta.abrindo {
+    display: block;
+    animation: abrirPorta 2.5s ease-in-out forwards;
+}
 
         @keyframes abrirPorta {
             from {
@@ -239,13 +239,14 @@
 
         // ENTRADA NA LANCHONETE
         function entrarLanchonete() {
-            const porta = document.getElementById("transicao-porta");
+    const porta = document.getElementById("transicao-porta");
 
-            porta.classList.add("abrindo");
+    porta.classList.add("abrindo");
 
-            setTimeout(function() {
-                window.location.href = "lanchonete.html";
-            }, 1200);
+    setTimeout(function() {
+        window.location.href = "lanchonete.html?transicao=1";
+    }, 2500);
+}
         }
     </script>
 
