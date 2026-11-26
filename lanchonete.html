@@ -51,16 +51,13 @@
             cursor: pointer;
         }
 
-        /* CORREÇÃO IMPORTANTE:
-           A imagem ocupa toda a largura do seu elemento pai.
-           O tamanho e a posição são definidos nas classes individuais. */
-
         .objeto img {
             display: block;
             width: 100%;
             height: auto;
             object-fit: contain;
             pointer-events: auto;
+            transition: filter 0.3s ease;
         }
 
         /* MESA */
@@ -68,12 +65,12 @@
         .mesa-area {
             width: 62%;
             left: 53%;
-            bottom: -20%;
+            bottom: -23%;
             z-index: 2;
         }
 
         .mesa-area img {
-            transition: transform 0.35s ease;
+            transition: transform 0.35s ease, filter 0.3s ease;
         }
 
         /* FREEZER */
@@ -94,59 +91,10 @@
             z-index: 5;
         }
 
-        /* DESTAQUE */
+        /* DESTAQUE DE TODOS OS ELEMENTOS */
 
-        .objeto:not(.mesa-area):hover {
-            filter: brightness(1.08);
-        }
-
-        /* AVISOS PEQUENOS */
-
-        .dica {
-            display: none;
-            position: absolute;
-            z-index: 40;
-
-            background: #ffffe1;
-            color: #222;
-
-            border: 1px solid #555;
-            box-shadow: 3px 3px 0 #222;
-
-            padding: 9px 12px;
-            width: 210px;
-
-            font-size: 12px;
-            line-height: 1.4;
-            text-align: center;
-
-            pointer-events: none;
-        }
-
-        .objeto:hover .dica {
-            display: block;
-        }
-
-        /* DICA DA ESTUFA: AO LADO, À ESQUERDA */
-
-        .estufa-area .dica {
-            top: 10%;
-            right: 95%;
-        }
-
-        /* DICA DO FREEZER: AO LADO, À DIREITA */
-
-        .freezer-area .dica {
-            top: 10%;
-            left: 95%;
-        }
-
-        /* DICA DA MESA */
-
-        .mesa-area .dica {
-            top: 5%;
-            left: 10%;
-            width: 240px;
+        .objeto:hover img {
+            filter: brightness(1.18);
         }
 
         /* JANELAS DOS CARDÁPIOS */
@@ -436,7 +384,7 @@
             .mesa-area {
                 width: 65%;
                 left: 38%;
-                bottom: -12%;
+                bottom: -15%;
             }
 
         }
@@ -461,10 +409,6 @@
 
         <img src="mesa.png" alt="Mesa com cadeiras">
 
-        <div class="dica" id="dica-mesa">
-            Aqui você irá comer após escolher pelo menos uma comida da estufa e do freezer. Pode ir lá, eu não vou sair correndo!
-        </div>
-
     </div>
 
 
@@ -473,10 +417,6 @@
     <div class="objeto freezer-area" onclick="abrirJanela('janela-freezer')">
 
         <img src="freezer-kibon.png" alt="Freezer Kibon">
-
-        <div class="dica">
-            Está calor? Escolha um sorvetinho!
-        </div>
 
     </div>
 
@@ -487,17 +427,13 @@
 
         <img src="estufa.png" alt="Estufa de salgados">
 
-        <div class="dica">
-            Salgadinhos fresquinhos! Clique para ver o cardápio.
-        </div>
-
     </div>
 
 
     <!-- CARDÁPIO DA ESTUFA -->
 
     <section class="janela" id="janela-estufa"
-             style="top: 20%; left: 35%;">
+             style="top: 20%; left: 43%;">
 
         <div class="barra-titulo">
             CARDÁPIO - ESTUFA
@@ -547,7 +483,7 @@
     <!-- CARDÁPIO DO FREEZER -->
 
     <section class="janela" id="janela-freezer"
-             style="top: 20%; left: 55%;">
+             style="top: 20%; left: 35%;">
 
         <div class="barra-titulo">
             CARDÁPIO - FREEZER KIBON
@@ -678,8 +614,6 @@
 
         document.getElementById("botao-comer").classList.add("visivel");
 
-        document.getElementById("dica-mesa").textContent =
-            "Tudo pronto! Sua mesa está esperando por você!";
     }
 
     function comer() {
