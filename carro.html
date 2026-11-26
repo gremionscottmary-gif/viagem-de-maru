@@ -51,31 +51,31 @@
 
         /* OBJETOS DO CARRO */
 
-       .objeto {
-    position: absolute;
-    z-index: 2;
-    object-fit: contain;
-    cursor: pointer;
-    animation: movimento-colagem 1.2s steps(1, end) infinite;
-    transition: transform 0.2s ease;
-}
+        .objeto {
+            position: absolute;
+            z-index: 2;
+            object-fit: contain;
+            cursor: pointer;
+            animation: movimento-colagem 1.2s steps(1, end) infinite;
+            transition: transform 0.2s ease;
+        }
 
-.objeto:hover {
-    animation-play-state: paused;
-    transform: scale(1.12);
-    z-index: 10;
-}
+        .objeto:hover {
+            animation-play-state: paused;
+            transform: scale(1.12);
+            z-index: 10;
+        }
 
         /* POLAROIDS */
 
-       .polaroids {
-    position: absolute;
-    top: 30%;
-    left: 11%;
-    width: 38%;
-    height: 26%;
-    z-index: 3;
-}
+        .polaroids {
+            position: absolute;
+            top: 30%;
+            left: 11%;
+            width: 38%;
+            height: 26%;
+            z-index: 3;
+        }
 
         .polaroid {
             position: absolute;
@@ -87,15 +87,16 @@
             transition: transform 0.25s ease;
             cursor: pointer;
         }
-        .polaroid {
-    animation: movimento-colagem 1.2s steps(1, end) infinite;
-    transition: transform 0.2s ease;
-}
 
-.polaroid:hover {
-    animation-play-state: paused;
-    z-index: 10;
-}
+        .polaroid {
+            animation: movimento-colagem 1.2s steps(1, end) infinite;
+            transition: transform 0.2s ease;
+        }
+
+        .polaroid:hover {
+            animation-play-state: paused;
+            z-index: 10;
+        }
 
         .polaroid img {
             width: 100%;
@@ -116,13 +117,14 @@
             transform: rotate(10deg);
             z-index: 1;
         }
-        .polaroid:first-child {
-    animation-delay: 0s;
-}
 
-.polaroid:last-child {
-    animation-delay: 0.4s;
-}
+        .polaroid:first-child {
+            animation-delay: 0s;
+        }
+
+        .polaroid:last-child {
+            animation-delay: 0.4s;
+        }
 
         .polaroid:first-child:hover {
             transform: rotate(-5deg) scale(1.08);
@@ -173,51 +175,50 @@
             transform: rotate(-8deg) scale(1.08);
         }
 
-        /* ALMOFADA */
+        /* ÁREA DA ALMOFADA */
 
-   /* ÁREA DA ALMOFADA */
+        .almofada-area {
+            position: absolute;
+            left: 9%;
+            bottom: -28%;
+            width: 72%;
+            height: 30%;
+            pointer-events: none;
+            z-index: 2;
+        }
 
-.almofada-area {
-    position: absolute;
-    left: 9%;
-    bottom: -28%;
-    width: 72%;
-    height: 30%;
-    pointer-events: none;
-    z-index: 2;
-}
+        /* IMAGEM DA ALMOFADA */
 
-/* IMAGEM DA ALMOFADA */
+        .almofada {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            left: 0;
+            bottom: 0;
+            pointer-events: none;
+            transition: transform 0.2s ease;
+        }
 
-.almofada {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    left: 0;
-    bottom: 0;
-    pointer-events: none;
-    transition: transform 0.2s ease;
-}
+        /* ÁREA MENOR QUE DETECTA O MOUSE */
 
-/* ÁREA MENOR QUE DETECTA O MOUSE */
+        .almofada-area::after {
+            content: "";
+            position: absolute;
+            left: 15%;
+            top: -115%;
+            width: 70%;
+            height: 70%;
+            pointer-events: auto;
+            cursor: pointer;
+        }
 
-.almofada-area::after {
-    content: "";
-    position: absolute;
-    left: 15%;
-    top: -115%;
-    width: 70%;
-    height: 70%;
-    pointer-events: auto;
-    cursor: pointer;
-}
+        /* EFEITO DE CRESCER */
 
-/* EFEITO DE CRESCER */
+        .almofada-area:hover .almofada {
+            animation-play-state: paused;
+            transform: scale(1.12);
+        }
 
-.almofada-area:hover .almofada {
-    animation-play-state: paused;
-    transform: scale(1.12);
-}
         /* ADESIVOS */
 
         .adesivo {
@@ -242,16 +243,6 @@
             right: 28%;
             transform: rotate(-8deg);
         }
-        
-     .adesivo-4 {
-    width: 15%;
-    top: 1%;
-    left: 30%;
-    right: auto;
-    bottom: auto;
-    transform: rotate(8deg);
-    animation-delay: 0.4s;
-}
 
         .adesivo:hover {
             transform: scale(1.2) rotate(0deg);
@@ -355,91 +346,94 @@
                 opacity: 1;
             }
         }
+
         @keyframes movimento-colagem {
-    0% {
-        translate: 0 0;
-    }
+            0% {
+                translate: 0 0;
+            }
 
-    20% {
-        translate: 3px -2px;
-    }
+            20% {
+                translate: 3px -2px;
+            }
 
-    40% {
-        translate: -2px 2px;
-    }
+            40% {
+                translate: -2px 2px;
+            }
 
-    60% {
-        translate: 2px 1px;
-    }
+            60% {
+                translate: 2px 1px;
+            }
 
-    80% {
-        translate: -3px -1px;
-    }
+            80% {
+                translate: -3px -1px;
+            }
 
-    100% {
-        translate: 0 0;
-    }
-}
+            100% {
+                translate: 0 0;
+            }
+        }
+
         .biscoito-doce {
-    animation-delay: 0.2s;
-}
+            animation-delay: 0.2s;
+        }
 
-.biscoito-salgado {
-    animation-delay: 0.5s;
-}
+        .biscoito-salgado {
+            animation-delay: 0.5s;
+        }
 
-.garrafa {
-    animation-delay: 0.8s;
-}
+        .garrafa {
+            animation-delay: 0.8s;
+        }
 
-.almofada {
-    animation-delay: 0.3s;
-}
+        .almofada {
+            animation-delay: 0.3s;
+        }
 
-.adesivo-1 {
-    animation-delay: 0.6s;
-}
+        .adesivo-1 {
+            animation-delay: 0.6s;
+        }
 
-.adesivo-2 {
-    animation-delay: 0.1s;
-}
+        .adesivo-2 {
+            animation-delay: 0.1s;
+        }
 
-.adesivo-3 {
-    animation-delay: 0.9s;
-}
+        .adesivo-3 {
+            animation-delay: 0.9s;
+        }
+
         /* AJUSTE DAS POLAROIDS */
 
-.polaroids {
-    top: 23%;
-    left: 7%;
-    width: 38%;
-    height: 26%;
-}
+        .polaroids {
+            top: 23%;
+            left: 7%;
+            width: 38%;
+            height: 26%;
+        }
 
-/* ADESIVO SUPERIOR */
+        /* ADESIVO SUPERIOR */
 
-.adesivo-1 {
-    top: 4%;
-    left: 27%;
-    right: auto;
-    bottom: auto;
-}
+        .adesivo-1 {
+            top: 4%;
+            left: 27%;
+            right: auto;
+            bottom: auto;
+        }
 
-/* ADESIVO DA DIREITA */
+        /* ADESIVO DA DIREITA */
 
-.adesivo-2 {
-    top: 75%;
-    right: 3%;
-    left: auto;
-    bottom: auto;
-}
+        .adesivo-2 {
+            top: 75%;
+            right: 3%;
+            left: auto;
+            bottom: auto;
+        }
 
-/* TERCEIRO ADESIVO */
+        /* TERCEIRO ADESIVO */
 
-.adesivo-3 {
-    bottom: 5%;
-    right: 28%;
-}
+        .adesivo-3 {
+            bottom: 5%;
+            right: 28%;
+        }
 
     </style>
 </head>
@@ -494,19 +488,20 @@
     >
 
     <!-- ALMOFADA -->
-<div class="almofada-area">
-    <img
-        src="almofada.png"
-        class="objeto almofada"
-        alt="Almofada"
-    >
-</div>
+
+    <div class="almofada-area">
+        <img
+            src="almofada.png"
+            class="objeto almofada"
+            alt="Almofada"
+        >
+    </div>
+
     <!-- ADESIVOS -->
 
     <img src="1113022495433345770-removebg-preview.png" class="objeto adesivo adesivo-1" alt="Adesivo1">
     <img src="adesivo-2.png" class="objeto adesivo adesivo-2" alt="Adesivo2">
     <img src="adesivo-3.png" class="objeto adesivo adesivo-3" alt="Adesivo3">
-    <img src="adesivo-4.png" class="objeto adesivo adesivo-4" alt="Adesivo4">
 
     <!-- TELA DE CARREGAMENTO -->
 
