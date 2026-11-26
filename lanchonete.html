@@ -12,8 +12,6 @@
 
     <style>
 
-        /* CONFIGURAÇÕES GERAIS */
-
         * {
             box-sizing: border-box;
         }
@@ -28,17 +26,15 @@
 
         body {
             cursor: default;
+            font-family: Tahoma, sans-serif;
         }
 
-
-        /* CENÁRIO PRINCIPAL */
+        /* CENÁRIO */
 
         .lanchonete-cena {
             position: relative;
-
             width: 100vw;
             height: 100vh;
-
             overflow: hidden;
 
             background-image: url("fundo-lanchonete.jpg");
@@ -47,154 +43,368 @@
             background-repeat: no-repeat;
         }
 
+        /* OBJETOS */
 
-        /* OBJETOS DO CENÁRIO */
-
-        .cenario {
+        .objeto {
             position: absolute;
+            height: auto;
+            cursor: pointer;
+        }
 
+        .objeto img {
+            display: block;
+            width: 100%;
             height: auto;
             object-fit: contain;
+            pointer-events: auto;
+        }
+
+        /* MESA */
+
+        .mesa-area {
+            width: 52%;
+            left: 48%;
+            bottom: -16%;
+            z-index: 2;
+        }
+
+        .mesa-area img {
+            transition: transform 0.35s ease;
+        }
+
+        /* FREEZER */
+
+        .freezer-area {
+            width: 38%;
+            left: -8%;
+            bottom: -7%;
+            z-index: 3;
+        }
+
+        /* ESTUFA */
+
+        .estufa-area {
+            width: 43%;
+            right: 0%;
+            top: 22%;
+            z-index: 5;
+        }
+
+        /* EFEITO DE DESTAQUE */
+
+        .objeto:not(.mesa-area):hover {
+            filter: brightness(1.08);
+        }
+
+        /* AVISOS PEQUENOS */
+
+        .dica {
+            display: none;
+            position: absolute;
+            z-index: 40;
+
+            background: #ffffe1;
+            color: #222;
+
+            border: 1px solid #555;
+            box-shadow: 3px 3px 0 #222;
+
+            padding: 9px 12px;
+            width: 210px;
+
+            font-size: 12px;
+            line-height: 1.4;
+            text-align: center;
 
             pointer-events: none;
         }
 
-
-      .mesa {
-    width: 48%;
-    left: 45%;
-    bottom: -8%;
-    z-index: 4;
-}
-
-.freezer {
-    width: 38%;
-    left: -8%;
-    bottom: -7%;
-    z-index: 3;
-}
-
-        /* ESTUFA */
-
-        .estufa {
-            width: 43%;
-
-            right: 0%;
-            top: 22%;
-
-            z-index: 5;
+        .objeto:hover .dica {
+            display: block;
         }
 
+        .estufa-area .dica {
+            top: -55px;
+            left: 15%;
+        }
 
-        /* COMIDAS */
+        .freezer-area .dica {
+            top: -55px;
+            left: 35%;
+        }
 
-        .comida {
+        .mesa-area .dica {
+            top: 5%;
+            left: 10%;
+            width: 240px;
+        }
+
+        /* JANELAS DOS CARDÁPIOS */
+
+        .janela {
+            display: none;
+
             position: absolute;
+            z-index: 100;
 
-            width: 9%;
-            height: auto;
+            width: 350px;
+            max-width: 90vw;
 
+            background: #c0c0c0;
+
+            border: 2px solid;
+            border-color: white #404040 #404040 white;
+
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.45);
+
+            padding: 3px;
+        }
+
+        .janela.aberta {
+            display: block;
+        }
+
+        .barra-titulo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: #000080;
+            color: white;
+
+            padding: 7px 9px;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .fechar {
+            border: 1px solid white;
+            background: #c0c0c0;
+            color: black;
+
+            width: 22px;
+            height: 20px;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .conteudo-janela {
+            padding: 12px;
+            color: #222;
+        }
+
+        .subtitulo {
+            font-size: 12px;
+            margin: 0 0 12px;
+        }
+
+        /* OPÇÕES DE COMIDA */
+
+        .opcao {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 8px;
+            margin-bottom: 8px;
+
+            background: #e5e5e5;
+            border: 1px solid #888;
+
+            font-size: 12px;
+        }
+
+        .opcao img {
+            width: 68px;
+            height: 68px;
             object-fit: contain;
 
+            animation: balancar 2.2s ease-in-out infinite;
+        }
+
+        .opcao:nth-child(2) img {
+            animation-delay: 0.3s;
+        }
+
+        .opcao:nth-child(3) img {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes balancar {
+            0%, 100% {
+                transform: translateX(-5px) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateX(5px) rotate(2deg);
+            }
+        }
+
+        .opcao label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             cursor: pointer;
-
-            opacity: 0.72;
-
-            z-index: 4;
-
-            transition:
-                opacity 0.25s ease,
-                transform 0.25s ease;
         }
 
-
-        /* DESTAQUE AO PASSAR O MOUSE */
-
-        .comida:hover {
-            opacity: 1;
-
-            transform: translateY(-15px) scale(1.15);
-
-            z-index: 20;
+        .opcao input {
+            cursor: pointer;
         }
 
+        /* BOTÕES WINDOWS */
 
-        /* ÁREA DOS ALIMENTOS NA ESTUFA */
+        .botao-win {
+            display: block;
+            width: 100%;
 
-        .comidas-estufa {
+            margin-top: 12px;
+            padding: 9px;
+
+            background: #c0c0c0;
+            color: black;
+
+            border: 2px solid;
+            border-color: white #404040 #404040 white;
+
+            font-family: Tahoma, sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+        .botao-win:active {
+            border-color: #404040 white white #404040;
+            padding-top: 10px;
+            padding-bottom: 8px;
+        }
+
+        /* MENSAGEM DE CONFIRMAÇÃO */
+
+        .mensagem {
+            display: none;
+
+            margin-top: 10px;
+            padding: 8px;
+
+            background: #ffffe1;
+            border: 1px solid #777;
+
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .mensagem.visivel {
+            display: block;
+        }
+
+        /* JANELA DA MESA */
+
+        .janela-mesa {
+            display: none;
+
             position: absolute;
+            z-index: 110;
 
-            top: 32%;
-            right: 5%;
+            width: 300px;
+            max-width: 85vw;
 
-            width: 36%;
-            height: 25%;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
 
-            z-index: 4;
+            background: #c0c0c0;
+
+            border: 2px solid;
+            border-color: white #404040 #404040 white;
+
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.45);
         }
 
-
-        /* EXEMPLOS DE POSIÇÕES PARA FUTURAS COMIDAS */
-
-        .coxinha {
-            top: 35%;
-            left: 8%;
+        .janela-mesa.aberta {
+            display: block;
         }
 
-        .empada {
-            top: 35%;
-            left: 38%;
+        .texto-mesa {
+            padding: 18px;
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: center;
         }
 
-        .pizza {
-            top: 35%;
-            left: 68%;
+        /* MESA PULSANDO */
+
+        @keyframes pulsar {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.045);
+            }
         }
 
+        .mesa-pronta img {
+            animation: pulsar 1.5s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
 
-        /* SORVETE */
+        .botao-comer {
+            display: none;
 
-        .sorvete {
             position: absolute;
+            z-index: 120;
 
-            width: 12%;
+            left: 65%;
+            bottom: 5%;
 
-            left: 5%;
-            top: 60%;
+            width: 125px;
+            padding: 12px;
 
-            z-index: 6;
+            background: #c0c0c0;
+
+            border: 3px solid;
+            border-color: white #404040 #404040 white;
+
+            font-family: Tahoma, sans-serif;
+            font-weight: bold;
+
+            cursor: pointer;
         }
 
+        .botao-comer.visivel {
+            display: block;
+        }
 
-        /* SETA PARA VOLTAR */
+        .botao-comer:active {
+            border-color: #404040 white white #404040;
+        }
+
+        /* SETA VOLTAR */
 
         .voltar {
             position: absolute;
-
             top: 3%;
             left: 3%;
 
             width: 65px;
             height: 65px;
 
-            z-index: 30;
+            z-index: 130;
         }
 
         .voltar img {
             width: 100%;
             height: 100%;
-
             object-fit: contain;
-
             transition: transform 0.2s ease;
         }
 
         .voltar:hover img {
             transform: scale(1.12);
         }
-
-
-        /* RESPONSIVIDADE */
 
         @media (max-width: 700px) {
 
@@ -203,105 +413,278 @@
                 height: 45px;
             }
 
+            .janela {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 15%;
+            }
+
+            .mesa-area {
+                width: 65%;
+                left: 38%;
+                bottom: -12%;
+            }
+
         }
 
     </style>
-
 </head>
-
 
 <body>
 
-    <main class="lanchonete-cena">
+<main class="lanchonete-cena">
+
+    <!-- VOLTAR -->
+
+    <a href="viagem.html" class="voltar">
+        <img src="seta-voltar.png" alt="Voltar">
+    </a>
 
 
-        <!-- SETA PARA VOLTAR -->
+    <!-- MESA -->
 
-        <a href="viagem.html" class="voltar">
+    <div class="objeto mesa-area" id="mesa">
 
-            <img src="seta-voltar.png" alt="Voltar">
+        <img src="mesa.png" alt="Mesa com cadeiras">
 
-        </a>
-
-
-
-        <!-- MESA AMARELA -->
-
-        <img
-            src="mesa.png"
-            class="cenario mesa"
-            alt="Mesa com cadeiras"
-        >
-
-
-
-        <!-- FREEZER KIBON -->
-
-        <img
-            src="freezer-kibon.png"
-            class="cenario freezer"
-            alt="Freezer Kibon"
-        >
-
-
-
-        <!-- ESTUFA DE SALGADOS -->
-
-        <img
-            src="estufa.png"
-            class="cenario estufa"
-            alt="Estufa de salgados"
-        >
-
-
-
-        <!-- ÁREA DAS COMIDAS -->
-
-        <div class="comidas-estufa">
-
-            <!--
-            AS COMIDAS SERÃO ADICIONADAS AQUI.
-
-            Exemplos:
-
-            <img src="coxinha.png"
-                 class="comida coxinha"
-                 alt="Coxinha">
-
-            <img src="empada.png"
-                 class="comida empada"
-                 alt="Empada de frango">
-
-            <img src="pizza.png"
-                 class="comida pizza"
-                 alt="Pizza">
-
-            -->
-
+        <div class="dica" id="dica-mesa">
+            Aqui você irá comer após escolher pelo menos uma comida da estufa e do freezer. Pode ir lá, eu não vou sair correndo!
         </div>
 
+    </div>
 
 
-        <!-- SORVETE -->
+    <!-- FREEZER -->
 
-        <!--
-        <img
-            src="sorvete-chocomenta.png"
-            class="comida sorvete"
-            alt="Sorvete de chocomenta"
-        >
-        -->
+    <div class="objeto freezer-area" onclick="abrirJanela('janela-freezer')">
 
+        <img src="freezer-kibon.png" alt="Freezer Kibon">
 
+        <div class="dica">
+            Está calor? Escolha um sorvetinho!
+        </div>
 
-        <!-- FUTURAMENTE:
-             COZINHA, FUNCIONÁRIA, BALCÃO,
-             OUTROS ALIMENTOS E JANELINHAS.
-        -->
+    </div>
 
 
-    </main>
+    <!-- ESTUFA -->
+
+    <div class="objeto estufa-area" onclick="abrirJanela('janela-estufa')">
+
+        <img src="estufa.png" alt="Estufa de salgados">
+
+        <div class="dica">
+            Salgadinhos fresquinhos! Clique para ver o cardápio.
+        </div>
+
+    </div>
+
+
+    <!-- CARDÁPIO DA ESTUFA -->
+
+    <section class="janela" id="janela-estufa"
+             style="top: 20%; left: 35%;">
+
+        <div class="barra-titulo">
+            CARDÁPIO - ESTUFA
+            <button class="fechar" onclick="fecharJanela('janela-estufa')">X</button>
+        </div>
+
+        <div class="conteudo-janela">
+
+            <p class="subtitulo">
+                Escolha pelo menos uma delícia!
+            </p>
+
+            <div class="opcao">
+                <img src="coxinha.png" alt="Coxinha">
+                <label>
+                    <input type="checkbox" name="estufa" value="Coxinha">
+                    Coxinha
+                </label>
+            </div>
+
+            <div class="opcao">
+                <img src="torta-frango.png" alt="Torta de frango">
+                <label>
+                    <input type="checkbox" name="estufa" value="Torta de frango">
+                    Torta de frango
+                </label>
+            </div>
+
+            <div class="opcao">
+                <img src="pizza.png" alt="Pizza">
+                <label>
+                    <input type="checkbox" name="estufa" value="Pizza">
+                    Pizza
+                </label>
+            </div>
+
+            <button class="botao-win" onclick="confirmarPedido('estufa')">
+                CONFIRME O PEDIDO
+            </button>
+
+            <div class="mensagem" id="mensagem-estufa"></div>
+
+        </div>
+    </section>
+
+
+    <!-- CARDÁPIO DO FREEZER -->
+
+    <section class="janela" id="janela-freezer"
+             style="top: 20%; left: 55%;">
+
+        <div class="barra-titulo">
+            CARDÁPIO - FREEZER KIBON
+            <button class="fechar" onclick="fecharJanela('janela-freezer')">X</button>
+        </div>
+
+        <div class="conteudo-janela">
+
+            <p class="subtitulo">
+                Qual vai ser o seu sorvete?
+            </p>
+
+            <div class="opcao">
+                <img src="sorvete-chocomenta.png" alt="Sorvete de chocomenta">
+                <label>
+                    <input type="checkbox" name="freezer" value="Sorvete de chocomenta">
+                    Chocomenta
+                </label>
+            </div>
+
+            <div class="opcao">
+                <img src="sorvete-pacoca.png" alt="Sorvete com creme de paçoca">
+                <label>
+                    <input type="checkbox" name="freezer" value="Sorvete com creme de paçoca">
+                    Creme de paçoca
+                </label>
+            </div>
+
+            <div class="opcao">
+                <img src="sorvete-maracuja-chocolate.png" alt="Sorvete de maracujá com chocolate">
+                <label>
+                    <input type="checkbox" name="freezer" value="Sorvete de maracujá com chocolate">
+                    Maracujá com chocolate
+                </label>
+            </div>
+
+            <button class="botao-win" onclick="confirmarPedido('freezer')">
+                CONFIRME O PEDIDO
+            </button>
+
+            <div class="mensagem" id="mensagem-freezer"></div>
+
+        </div>
+    </section>
+
+
+    <!-- JANELA INFORMATIVA DA MESA -->
+
+    <section class="janela-mesa" id="janela-mesa">
+
+        <div class="barra-titulo">
+            SUA MESINHA
+            <button class="fechar" onclick="fecharJanela('janela-mesa')">X</button>
+        </div>
+
+        <div class="texto-mesa">
+            Aqui você irá comer após escolher pelo menos uma comida da estufa e do freezer. Pode ir lá, eu não vou sair correndo!
+        </div>
+
+        <button class="botao-win" onclick="fecharJanela('janela-mesa')">
+            ENTENDI!
+        </button>
+
+    </section>
+
+
+    <!-- BOTÃO COMER -->
+
+    <button class="botao-comer" id="botao-comer" onclick="comer()">
+        COMER!
+    </button>
+
+
+</main>
+
+
+<script>
+
+    let pedidoEstufaConfirmado = false;
+    let pedidoFreezerConfirmado = false;
+
+    function abrirJanela(id) {
+
+        document.querySelectorAll(".janela").forEach(janela => {
+            janela.classList.remove("aberta");
+        });
+
+        document.getElementById(id).classList.add("aberta");
+    }
+
+    function fecharJanela(id) {
+        document.getElementById(id).classList.remove("aberta");
+    }
+
+    function confirmarPedido(tipo) {
+
+        const selecionados = document.querySelectorAll(
+            'input[name="' + tipo + '"]:checked'
+        );
+
+        const mensagem = document.getElementById("mensagem-" + tipo);
+
+        if (selecionados.length === 0) {
+            mensagem.textContent = "Escolha pelo menos uma opção antes de confirmar!";
+            mensagem.classList.add("visivel");
+            return;
+        }
+
+        if (tipo === "estufa") {
+            pedidoEstufaConfirmado = true;
+        }
+
+        if (tipo === "freezer") {
+            pedidoFreezerConfirmado = true;
+        }
+
+        mensagem.textContent = "Pedido confirmado! :D";
+        mensagem.classList.add("visivel");
+
+        if (pedidoEstufaConfirmado && pedidoFreezerConfirmado) {
+            liberarMesa();
+        }
+    }
+
+    function liberarMesa() {
+
+        document.getElementById("mesa").classList.add("mesa-pronta");
+
+        document.getElementById("botao-comer").classList.add("visivel");
+
+        document.getElementById("dica-mesa").textContent =
+            "Tudo pronto! Sua mesa está esperando por você!";
+    }
+
+    function comer() {
+
+        alert("Pode sentar! Bom apetite!! :D");
+
+    }
+
+    /* AVISO DA MESA ANTES DOS PEDIDOS */
+
+    document.getElementById("mesa").addEventListener("click", function() {
+
+        if (!pedidoEstufaConfirmado || !pedidoFreezerConfirmado) {
+            document.getElementById("janela-mesa").classList.add("aberta");
+        }
+
+    });
+
+</script>
 
 </body>
-
 </html>
