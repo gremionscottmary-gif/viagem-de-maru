@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lanchonete :P</title>
+
+    <link rel="icon" type="image/png" href="56224695344760420-removebg-preview.png">
+
+    <style>
+
+        /* CONFIGURAÇÕES GERAIS */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            cursor: default;
+        }
+
+
+        /* CENÁRIO PRINCIPAL */
+
+        .lanchonete-cena {
+            position: relative;
+
+            width: 100vw;
+            height: 100vh;
+
+            overflow: hidden;
+
+            background-image: url("fundo-lanchonete.jpg");
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+
+        /* OBJETOS DO CENÁRIO */
+
+        .cenario {
+            position: absolute;
+
+            height: auto;
+            object-fit: contain;
+
+            pointer-events: none;
+        }
+
+
+        /* MESA AMARELA */
+
+        .mesa {
+            width: 38%;
+
+            left: 48%;
+            bottom: 0%;
+
+            z-index: 4;
+        }
+
+
+        /* FREEZER KIBON */
+
+        .freezer {
+            width: 30%;
+
+            left: 0%;
+            bottom: 0%;
+
+            z-index: 3;
+        }
+
+
+        /* ESTUFA */
+
+        .estufa {
+            width: 43%;
+
+            right: 0%;
+            top: 22%;
+
+            z-index: 5;
+        }
+
+
+        /* COMIDAS */
+
+        .comida {
+            position: absolute;
+
+            width: 9%;
+            height: auto;
+
+            object-fit: contain;
+
+            cursor: pointer;
+
+            opacity: 0.72;
+
+            z-index: 4;
+
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        /* DESTAQUE AO PASSAR O MOUSE */
+
+        .comida:hover {
+            opacity: 1;
+
+            transform: translateY(-15px) scale(1.15);
+
+            z-index: 20;
+        }
+
+
+        /* ÁREA DOS ALIMENTOS NA ESTUFA */
+
+        .comidas-estufa {
+            position: absolute;
+
+            top: 32%;
+            right: 5%;
+
+            width: 36%;
+            height: 25%;
+
+            z-index: 4;
+        }
+
+
+        /* EXEMPLOS DE POSIÇÕES PARA FUTURAS COMIDAS */
+
+        .coxinha {
+            top: 35%;
+            left: 8%;
+        }
+
+        .empada {
+            top: 35%;
+            left: 38%;
+        }
+
+        .pizza {
+            top: 35%;
+            left: 68%;
+        }
+
+
+        /* SORVETE */
+
+        .sorvete {
+            position: absolute;
+
+            width: 12%;
+
+            left: 5%;
+            top: 60%;
+
+            z-index: 6;
+        }
+
+
+        /* SETA PARA VOLTAR */
+
+        .voltar {
+            position: absolute;
+
+            top: 3%;
+            left: 3%;
+
+            width: 65px;
+            height: 65px;
+
+            z-index: 30;
+        }
+
+        .voltar img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            transition: transform 0.2s ease;
+        }
+
+        .voltar:hover img {
+            transform: scale(1.12);
+        }
+
+
+        /* RESPONSIVIDADE */
+
+        @media (max-width: 700px) {
+
+            .voltar {
+                width: 45px;
+                height: 45px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="lanchonete-cena">
+
+
+        <!-- SETA PARA VOLTAR -->
+
+        <a href="viagem.html" class="voltar">
+
+            <img src="seta-voltar.png" alt="Voltar">
+
+        </a>
+
+
+
+        <!-- MESA AMARELA -->
+
+        <img
+            src="mesa.png"
+            class="cenario mesa"
+            alt="Mesa com cadeiras"
+        >
+
+
+
+        <!-- FREEZER KIBON -->
+
+        <img
+            src="freezer-kibon.png"
+            class="cenario freezer"
+            alt="Freezer Kibon"
+        >
+
+
+
+        <!-- ESTUFA DE SALGADOS -->
+
+        <img
+            src="estufa.png"
+            class="cenario estufa"
+            alt="Estufa de salgados"
+        >
+
+
+
+        <!-- ÁREA DAS COMIDAS -->
+
+        <div class="comidas-estufa">
+
+            <!--
+            AS COMIDAS SERÃO ADICIONADAS AQUI.
+
+            Exemplos:
+
+            <img src="coxinha.png"
+                 class="comida coxinha"
+                 alt="Coxinha">
+
+            <img src="empada.png"
+                 class="comida empada"
+                 alt="Empada de frango">
+
+            <img src="pizza.png"
+                 class="comida pizza"
+                 alt="Pizza">
+
+            -->
+
+        </div>
+
+
+
+        <!-- SORVETE -->
+
+        <!--
+        <img
+            src="sorvete-chocomenta.png"
+            class="comida sorvete"
+            alt="Sorvete de chocomenta"
+        >
+        -->
+
+
+
+        <!-- FUTURAMENTE:
+             COZINHA, FUNCIONÁRIA, BALCÃO,
+             OUTROS ALIMENTOS E JANELINHAS.
+        -->
+
+
+    </main>
+
+</body>
+
+</html>
