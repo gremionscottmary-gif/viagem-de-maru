@@ -231,24 +231,23 @@
     <!-- TRANSIÇÃO DA PORTA -->
     <div id="transicao-porta"></div>
 
-    <script>
-        // ANIMAÇÃO INICIAL
-        setTimeout(function() {
-            document.getElementById("abrir-olhos").classList.add("aberto");
-        }, 300);
-
-        // ENTRADA NA LANCHONETE
-        function entrarLanchonete() {
-    const porta = document.getElementById("transicao-porta");
-
-    porta.classList.add("abrindo");
-
+  <script>
+    // ANIMAÇÃO INICIAL
     setTimeout(function() {
-        window.location.href = "lanchonete.html?transicao=1";
-    }, 2500);
-}
-        }
-    </script>
+        document.getElementById("abrir-olhos").classList.add("aberto");
+    }, 300);
+
+    // ENTRADA NA LANCHONETE
+    function entrarLanchonete() {
+        const porta = document.getElementById("transicao-porta");
+
+        porta.classList.add("abrindo");
+
+        setTimeout(function() {
+            window.location.href = "lanchonete.html?transicao=1";
+        }, 2500);
+    }
+</script>
 
 </body>
 </html>
