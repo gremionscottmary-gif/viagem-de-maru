@@ -51,11 +51,13 @@
             cursor: pointer;
         }
 
+        /* CORREÇÃO IMPORTANTE:
+           A imagem ocupa toda a largura do seu elemento pai.
+           O tamanho e a posição são definidos nas classes individuais. */
+
         .objeto img {
             display: block;
-            width: 52%;
-            left: 48%;
-            bottom: -16%;
+            width: 100%;
             height: auto;
             object-fit: contain;
             pointer-events: auto;
@@ -64,9 +66,9 @@
         /* MESA */
 
         .mesa-area {
-            width: 52%;
-            left: 48%;
-            bottom: -7%;
+            width: 62%;
+            left: 53%;
+            bottom: -20%;
             z-index: 2;
         }
 
@@ -77,9 +79,9 @@
         /* FREEZER */
 
         .freezer-area {
-            width: 38%;
+            width: 42%;
             left: -8%;
-            bottom: -7%;
+            bottom: -14%;
             z-index: 3;
         }
 
@@ -88,11 +90,11 @@
         .estufa-area {
             width: 43%;
             right: 0%;
-            top: 22%;
+            top: 32%;
             z-index: 5;
         }
 
-        /* EFEITO DE DESTAQUE */
+        /* DESTAQUE */
 
         .objeto:not(.mesa-area):hover {
             filter: brightness(1.08);
@@ -125,15 +127,21 @@
             display: block;
         }
 
+        /* DICA DA ESTUFA: AO LADO, À ESQUERDA */
+
         .estufa-area .dica {
-            top: -55px;
-            left: 15%;
+            top: 10%;
+            right: 95%;
         }
 
+        /* DICA DO FREEZER: AO LADO, À DIREITA */
+
         .freezer-area .dica {
-            top: -55px;
-            left: 35%;
+            top: 10%;
+            left: 95%;
         }
+
+        /* DICA DA MESA */
 
         .mesa-area .dica {
             top: 5%;
@@ -353,6 +361,8 @@
             transform-origin: center bottom;
         }
 
+        /* BOTÃO COMER */
+
         .botao-comer {
             display: none;
 
@@ -408,6 +418,8 @@
             transform: scale(1.12);
         }
 
+        /* RESPONSIVIDADE */
+
         @media (max-width: 700px) {
 
             .voltar {
@@ -416,9 +428,9 @@
             }
 
             .janela {
-                left: 50%;
+                left: 50% !important;
                 transform: translateX(-50%);
-                top: 15%;
+                top: 15% !important;
             }
 
             .mesa-area {
@@ -671,9 +683,7 @@
     }
 
     function comer() {
-
         alert("Pode sentar! Bom apetite!! :D");
-
     }
 
     /* AVISO DA MESA ANTES DOS PEDIDOS */
