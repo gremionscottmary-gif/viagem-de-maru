@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,32 +9,35 @@
 
     <style>
         /* TRANSIÇÃO DA PORTA */
-#transicao-porta {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("porta.png");
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 99999;
-    pointer-events: none;
-    transform: translateX(-100%);
-}
+        #transicao-porta {
+            display: none;
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("porta.png");
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 99999;
+            pointer-events: none;
+            transform: translateX(-100%);
+        }
 
-#transicao-porta.abrindo {
-    animation: abrirPorta 1.2s ease-in-out forwards;
-}
+        #transicao-porta.abrindo {
+            display: block;
+            animation: abrirPorta 1.2s ease-in-out forwards;
+        }
 
-@keyframes abrirPorta {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(100%);
-    }
-}
+        @keyframes abrirPorta {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+
         html, body {
             margin: 0;
             width: 100%;
@@ -137,13 +141,13 @@
             animation-delay: 0s;
         }
 
-     .carro img {
-    transform: rotate(90deg) scaleX(-1);
-}
+        .carro img {
+            transform: rotate(90deg) scaleX(-1);
+        }
 
-.carro:hover img {
-    transform: rotate(90deg) scaleX(-1) scale(1.12);
-}
+        .carro:hover img {
+            transform: rotate(90deg) scaleX(-1) scale(1.12);
+        }
 
         .loja {
             top: -1%;
@@ -189,17 +193,17 @@
     <img src="estrada.png" class="estrada" alt="">
 
     <!-- CARRO -->
-   <div class="objeto carro"
-     onclick="window.location.href='carro.html'">
-    <img src="carro-removebg-preview.png" alt="Carro">
-</div>
+    <div class="objeto carro"
+         onclick="window.location.href='carro.html'">
+        <img src="carro-removebg-preview.png" alt="Carro">
+    </div>
 
-<!-- LOJA DE CONVENIÊNCIA -->
-<div class="objeto loja">
-    <a href="#" onclick="entrarLanchonete(); return false;">
-        <img src="lanche-removebg-preview.png" alt="Loja">
-    </a>
-</div>
+    <!-- LOJA DE CONVENIÊNCIA -->
+    <div class="objeto loja">
+        <a href="#" onclick="entrarLanchonete(); return false;">
+            <img src="lanche-removebg-preview.png" alt="Loja">
+        </a>
+    </div>
 
     <!-- NOTEBOOK -->
     <div class="objeto notebook">
@@ -221,24 +225,28 @@
         <img src="Calendário-removebg-preview.png" alt="Calendário">
     </div>
 
+    <!-- ABERTURA DOS OLHOS -->
     <div id="abrir-olhos"></div>
 
+    <!-- TRANSIÇÃO DA PORTA -->
+    <div id="transicao-porta"></div>
+
     <script>
+        // ANIMAÇÃO INICIAL
         setTimeout(function() {
             document.getElementById("abrir-olhos").classList.add("aberto");
         }, 300);
-        <div id="transicao-porta"></div>
-        <script>
-function entrarLanchonete() {
-    const porta = document.getElementById("transicao-porta");
 
-    porta.classList.add("abrindo");
+        // ENTRADA NA LANCHONETE
+        function entrarLanchonete() {
+            const porta = document.getElementById("transicao-porta");
 
-    setTimeout(function() {
-        window.location.href = "lanchonete.html";
-    }, 1200);
-}
-</script>
+            porta.classList.add("abrindo");
+
+            setTimeout(function() {
+                window.location.href = "lanchonete.html";
+            }, 1200);
+        }
     </script>
 
 </body>
