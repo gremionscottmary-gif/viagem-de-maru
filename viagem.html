@@ -9,6 +9,33 @@
     <link rel="icon" type="image/png" href="56224695344760420-removebg-preview.png">
 
     <style>
+        /* TRANSIÇÃO DA PORTA */
+#transicao-porta {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("porta.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 99999;
+    pointer-events: none;
+    transform: translateX(-100%);
+}
+
+#transicao-porta.abrindo {
+    animation: abrirPorta 1.2s ease-in-out forwards;
+}
+
+@keyframes abrirPorta {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
         html, body {
             margin: 0;
             width: 100%;
@@ -202,6 +229,18 @@
         setTimeout(function() {
             document.getElementById("abrir-olhos").classList.add("aberto");
         }, 300);
+        <div id="transicao-porta"></div>
+        <script>
+function entrarLanchonete() {
+    const porta = document.getElementById("transicao-porta");
+
+    porta.classList.add("abrindo");
+
+    setTimeout(function() {
+        window.location.href = "lanchonete.html";
+    }, 1200);
+}
+</script>
     </script>
 
 </body>
