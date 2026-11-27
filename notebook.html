@@ -1,1 +1,508 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu computador</title>
+<link rel="icon" type="image/png" href="56224695344760420-removebg-preview.png">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+/* DESKTOP */
+
+#desktop {
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(135deg, #397db5, #6bb5d0 45%, #347a9e);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Quando encontrar seu GIF, coloque o nome aqui:
+   background-image: url("seu-gif.gif");
+*/
+
+.icones {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 12px;
+    height: calc(100% - 65px);
+}
+
+.icone {
+    width: 88px;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 5px 3px;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    text-shadow: 1px 1px 2px #222;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.icone:hover {
+    background: rgba(80, 150, 220, 0.35);
+    border: 1px solid rgba(210, 235, 255, 0.7);
+}
+
+.icone img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    image-rendering: auto;
+}
+
+.icone span {
+    max-width: 85px;
+}
+
+/* BARRA DE TAREFAS */
+
+#barra-tarefas {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(
+        to bottom,
+        #245edb,
+        #1545a5 45%,
+        #123a91
+    );
+    border-top: 1px solid #83baff;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.25);
+}
+
+#iniciar {
+    height: 38px;
+    min-width: 105px;
+    border: 0;
+    border-radius: 0 18px 18px 0;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 16px;
+    background: linear-gradient(#68c94b, #25851c 55%, #176514);
+    box-shadow: inset 0 1px 3px #c5ff9d;
+    cursor: pointer;
+}
+
+#iniciar:hover {
+    filter: brightness(1.15);
+}
+
+#programas-abertos {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    align-items: center;
+    padding-left: 8px;
+    gap: 5px;
+}
+
+.programa-aberto {
+    color: white;
+    font-size: 11px;
+    padding: 7px 14px;
+    min-width: 115px;
+    background: linear-gradient(#477ac5, #244b91);
+    border: 1px solid #719bd5;
+    border-radius: 3px;
+}
+
+#relogio {
+    color: white;
+    font-size: 11px;
+    padding: 0 13px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 20, 80, 0.25);
+}
+
+/* MENU INICIAR */
+
+#menu-iniciar {
+    display: none;
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 260px;
+    background: #f1f3f8;
+    border: 1px solid #315b9c;
+    box-shadow: 3px 3px 10px #2228;
+    z-index: 200;
+}
+
+#menu-iniciar.aberto {
+    display: block;
+}
+
+.menu-topo {
+    padding: 13px;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(#4384c5, #174b91);
+}
+
+.menu-opcao {
+    padding: 12px;
+    font-size: 13px;
+    color: #222;
+    cursor: pointer;
+}
+
+.menu-opcao:hover {
+    background: #c8def8;
+}
+
+/* JANELAS DOS APLICATIVOS */
+
+.janela {
+    display: none;
+    position: absolute;
+    width: min(620px, 85vw);
+    height: min(420px, 75vh);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ece9d8;
+    border: 1px solid #174b91;
+    box-shadow: 4px 5px 15px #0008;
+    z-index: 50;
+}
+
+.janela.aberta {
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-janela {
+    height: 30px;
+    padding: 5px 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    background: linear-gradient(#4b91df, #1551a5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fechar {
+    width: 22px;
+    height: 21px;
+    border: 1px solid white;
+    border-radius: 3px;
+    background: linear-gradient(#f58b79, #c52c20);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.conteudo-janela {
+    flex: 1;
+    padding: 18px;
+    overflow: auto;
+    color: #222;
+    font-size: 13px;
+}
+
+.conteudo-janela h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+/* INICIALIZAÇÃO */
+
+#inicializacao {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #050505;
+    color: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#inicializacao.visivel {
+    display: flex;
+}
+
+.logo-windows {
+    display: grid;
+    grid-template-columns: 45px 45px;
+    grid-template-rows: 45px 45px;
+    gap: 4px;
+    transform: perspective(150px) rotateY(-12deg);
+    filter: drop-shadow(0 0 12px #7acaff);
+    animation: brilho 2s infinite alternate;
+}
+
+.quadrado {
+    border-radius: 5px;
+}
+
+.q1 { background: #f04b38; }
+.q2 { background: #4ba7e8; }
+.q3 { background: #65bd45; }
+.q4 { background: #f5c644; }
+
+#mensagem-inicial {
+    margin-top: 30px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #ddd;
+}
+
+.carregamento {
+    width: 170px;
+    height: 4px;
+    margin-top: 24px;
+    background: #333;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.carregamento::after {
+    content: "";
+    display: block;
+    width: 45%;
+    height: 100%;
+    background: #80caff;
+    animation: carregar 1.5s ease-in-out infinite;
+}
+
+@keyframes carregar {
+    from { transform: translateX(-110%); }
+    to { transform: translateX(250%); }
+}
+
+@keyframes brilho {
+    from { opacity: 0.75; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+    .icones {
+        gap: 5px;
+    }
+
+    .icone {
+        width: 75px;
+        font-size: 11px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- DESKTOP -->
+<div id="desktop">
+
+    <div class="icones">
+
+        <div class="icone" onclick="abrirJanela('youtube')">
+            <img src="icone-youtube.png" alt="YouTube">
+            <span>YouTube</span>
+        </div>
+
+        <div class="icone" onclick="abrirJanela('radar')">
+            <img src="icone-radar.png" alt="Detector">
+            <span>Detector de zumbis</span>
+        </div>
+
+        <div class="icone" onclick="abrirJanela('jujutsu')">
+            <img src="icone-jujutsu.png" alt="Blog">
+            <span>Blog de Jujutsu</span>
+        </div>
+
+        <div class="icone" onclick="abrirJanela('misterio')">
+            <img src="icone-misterio.png" alt="Mistério">
+            <span>???</span>
+        </div>
+
+    </div>
+
+    <!-- JANELA YOUTUBE -->
+    <div class="janela" id="youtube">
+        <div class="titulo-janela">
+            YouTube
+            <button class="fechar" onclick="fecharJanelas()">X</button>
+        </div>
+        <div class="conteudo-janela">
+            <h2>YouTube</h2>
+            <p>Bem-vindo ao YouTube!</p>
+            <p>Em breve: vídeos, gameplay e outras coisas interessantes.</p>
+        </div>
+    </div>
+
+    <!-- JANELA RADAR -->
+    <div class="janela" id="radar">
+        <div class="titulo-janela">
+            Detector de zumbis
+            <button class="fechar" onclick="fecharJanelas()">X</button>
+        </div>
+        <div class="conteudo-janela">
+            <h2>RADAR DE MOVIMENTO</h2>
+            <p>Sistema iniciado.</p>
+            <p>Monitoramento em andamento...</p>
+        </div>
+    </div>
+
+    <!-- JANELA JUJUTSU -->
+    <div class="janela" id="jujutsu">
+        <div class="titulo-janela">
+            Blog de Jujutsu
+            <button class="fechar" onclick="fecharJanelas()">X</button>
+        </div>
+        <div class="conteudo-janela">
+            <h2>Meu blog de Jujutsu!</h2>
+            <p>Uma coleção de anotações, curiosidades e informações.</p>
+        </div>
+    </div>
+
+    <!-- JANELA MISTERIOSA -->
+    <div class="janela" id="misterio">
+        <div class="titulo-janela">
+            Acesso restrito
+            <button class="fechar" onclick="fecharJanelas()">X</button>
+        </div>
+        <div class="conteudo-janela">
+            <h2>Acesso indisponível</h2>
+            <p>Você ainda não tem permissão para visitar esta página.</p>
+            <p>Visite os outros aplicativos primeiro.</p>
+        </div>
+    </div>
+
+    <!-- BARRA DE TAREFAS -->
+    <div id="barra-tarefas">
+        <button id="iniciar" onclick="alternarMenu()">⊞ Iniciar</button>
+        <div id="programas-abertos"></div>
+        <div id="relogio">00:00</div>
+    </div>
+
+    <!-- MENU INICIAR -->
+    <div id="menu-iniciar">
+        <div class="menu-topo">Meu computador</div>
+        <div class="menu-opcao" onclick="abrirJanela('youtube')">YouTube</div>
+        <div class="menu-opcao" onclick="abrirJanela('radar')">Detector de zumbis</div>
+        <div class="menu-opcao" onclick="abrirJanela('jujutsu')">Blog de Jujutsu</div>
+        <div class="menu-opcao" onclick="fecharJanelas()">Fechar janelas</div>
+    </div>
+
+</div>
+
+<!-- TELA DE INICIALIZAÇÃO -->
+<div id="inicializacao">
+    <div class="logo-windows">
+        <div class="quadrado q1"></div>
+        <div class="quadrado q2"></div>
+        <div class="quadrado q3"></div>
+        <div class="quadrado q4"></div>
+    </div>
+
+    <div id="mensagem-inicial">Iniciando o Windows...</div>
+    <div class="carregamento"></div>
+</div>
+
+<script>
+function abrirJanela(id) {
+    fecharJanelas();
+
+    document.getElementById(id).classList.add("aberta");
+
+    document.getElementById("programas-abertos").innerHTML =
+        '<div class="programa-aberto">' +
+        document.getElementById(id).querySelector(".titulo-janela").textContent.replace("X", "") +
+        '</div>';
+
+    document.getElementById("menu-iniciar").classList.remove("aberto");
+}
+
+function fecharJanelas() {
+    document.querySelectorAll(".janela").forEach(function(janela) {
+        janela.classList.remove("aberta");
+    });
+
+    document.getElementById("programas-abertos").innerHTML = "";
+}
+
+function alternarMenu() {
+    document.getElementById("menu-iniciar").classList.toggle("aberto");
+}
+
+document.addEventListener("click", function(event) {
+    const menu = document.getElementById("menu-iniciar");
+    const botao = document.getElementById("iniciar");
+
+    if (!menu.contains(event.target) && event.target !== botao) {
+        menu.classList.remove("aberto");
+    }
+});
+
+/* RELÓGIO */
+function atualizarRelogio() {
+    const agora = new Date();
+    document.getElementById("relogio").textContent =
+        agora.toLocaleTimeString("pt-BR", {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+}
+atualizarRelogio();
+setInterval(atualizarRelogio, 1000);
+
+/* TRANSIÇÃO DE INICIALIZAÇÃO */
+const parametros = new URLSearchParams(window.location.search);
+
+if (parametros.get("iniciar") === "1") {
+    const tela = document.getElementById("inicializacao");
+
+    tela.classList.add("visivel");
+
+    setTimeout(function() {
+        tela.style.transition = "opacity 1.2s";
+        tela.style.opacity = "0";
+
+        setTimeout(function() {
+            tela.style.display = "none";
+        }, 1200);
+    }, 4000);
+}
+</script>
+
+</body>
+</html>
+
