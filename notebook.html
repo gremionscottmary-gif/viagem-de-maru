@@ -241,88 +241,28 @@ html, body {
     font-size: 18px;
 }
 
-/* INICIALIZAÇÃO */
+
+/* INTRODUÇÃO WINDOWS 7 */
 
 #inicializacao {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: #050505;
-    color: white;
+    background: black;
     display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 #inicializacao.visivel {
-    display: flex;
-}
-
-.logo-windows {
-    display: grid;
-    grid-template-columns: 45px 45px;
-    grid-template-rows: 45px 45px;
-    gap: 4px;
-    transform: perspective(150px) rotateY(-12deg);
-    filter: drop-shadow(0 0 12px #7acaff);
-    animation: brilho 2s infinite alternate;
-}
-
-.quadrado {
-    border-radius: 5px;
-}
-
-.q1 { background: #f04b38; }
-.q2 { background: #4ba7e8; }
-.q3 { background: #65bd45; }
-.q4 { background: #f5c644; }
-
-#mensagem-inicial {
-    margin-top: 30px;
-    font-size: 15px;
-    letter-spacing: 2px;
-    color: #ddd;
-}
-
-.carregamento {
-    width: 170px;
-    height: 4px;
-    margin-top: 24px;
-    background: #333;
-    overflow: hidden;
-    border-radius: 5px;
-}
-
-.carregamento::after {
-    content: "";
     display: block;
-    width: 45%;
+}
+
+#video-inicializacao {
+    width: 100%;
     height: 100%;
-    background: #80caff;
-    animation: carregar 1.5s ease-in-out infinite;
+    object-fit: contain;
+    display: block;
 }
 
-@keyframes carregar {
-    from { transform: translateX(-110%); }
-    to { transform: translateX(250%); }
-}
-
-@keyframes brilho {
-    from { opacity: 0.75; }
-    to { opacity: 1; }
-}
-
-@media (max-width: 600px) {
-    .icones {
-        gap: 5px;
-    }
-
-    .icone {
-        width: 75px;
-        font-size: 11px;
-    }
-}
 </style>
 </head>
 
@@ -424,17 +364,11 @@ html, body {
 
 </div>
 
-<!-- TELA DE INICIALIZAÇÃO -->
+<!-- INTRODUÇÃO WINDOWS 7 -->
 <div id="inicializacao">
-    <div class="logo-windows">
-        <div class="quadrado q1"></div>
-        <div class="quadrado q2"></div>
-        <div class="quadrado q3"></div>
-        <div class="quadrado q4"></div>
-    </div>
-
-    <div id="mensagem-inicial">Iniciando o Windows...</div>
-    <div class="carregamento"></div>
+    <video id="video-inicializacao" autoplay muted playsinline>
+        <source src="intro-windows7.mp4" type="video/mp4">
+    </video>
 </div>
 
 <script>
@@ -485,21 +419,25 @@ atualizarRelogio();
 setInterval(atualizarRelogio, 1000);
 
 /* TRANSIÇÃO DE INICIALIZAÇÃO */
+
 const parametros = new URLSearchParams(window.location.search);
 
 if (parametros.get("iniciar") === "1") {
     const tela = document.getElementById("inicializacao");
+    const video = document.getElementById("video-inicializacao");
 
     tela.classList.add("visivel");
 
-    setTimeout(function() {
+    video.play();
+
+    video.addEventListener("ended", function() {
         tela.style.transition = "opacity 1.2s";
         tela.style.opacity = "0";
 
         setTimeout(function() {
             tela.style.display = "none";
         }, 1200);
-    }, 4000);
+    });
 }
 </script>
 
