@@ -1,11 +1,12 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>dezembro — 31 motivos pra ser VOCÊ</title>
+<title>-dezembro- | 31 motivos pra ser VOCÊ</title>
 
 <link rel="icon" type="image/png" href="56224695344760420-removebg-preview.png">
 
@@ -17,270 +18,679 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background: #b9b2a2;
-    font-family: Tahoma, sans-serif;
-    color: #393329;
     overflow-x: hidden;
+    font-family: Tahoma, Arial, sans-serif;
+    color: #302d28;
+
+    /* TROQUE PELO NOME DA SUA IMAGEM DE FUNDO DEPOIS */
+    background-image:
+        linear-gradient(#17221b35, #17221b35),
+        url("fundo-calendario.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #344b3d;
 }
 
-/* FUNDO */
+/* TEXTURA DE VIDRO E LUZES DO FUNDO */
 
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background:
-        radial-gradient(ellipse at center, transparent 30%, #00000018 100%),
-        repeating-linear-gradient(
-            0deg,
-            #ffffff08 0px,
-            #ffffff08 1px,
-            transparent 1px,
-            transparent 4px
-        );
+    z-index: 0;
     pointer-events: none;
-    z-index: 10;
+
+    background:
+        radial-gradient(ellipse at 15% 20%, #ffffff35, transparent 35%),
+        radial-gradient(ellipse at 85% 85%, #b5e5c52b, transparent 35%);
+
+    mix-blend-mode: screen;
 }
 
-/* FOLHA DO CALENDÁRIO */
+/* BARRINHA DE APLICATIVOS NO TOPO */
 
-.pagina {
-    width: min(1100px, 94%);
-    min-height: 88vh;
-    margin: 35px auto;
-    padding: 35px;
-    background: #e9dfc9;
-    border: 1px solid #b6a98e;
-    box-shadow: 7px 9px 0 #625a4b55;
+.dock {
     position: relative;
+    z-index: 2;
+
+    width: fit-content;
+    max-width: 94%;
+    margin: 12px auto 24px;
+    padding: 5px 9px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    background: #ffffff35;
+    border: 1px solid #ffffff75;
+    border-radius: 5px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 2px 12px #00000025,
+        inset 0 1px 1px #ffffff90;
 }
 
-/* DETALHES DO PAPEL */
+.dock-icone {
+    width: 25px;
+    height: 25px;
 
-.pagina::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+
+    color: white;
+    border: 1px solid #ffffff90;
+    border-radius: 4px;
+
+    box-shadow: 1px 2px 3px #00000045;
+    text-shadow: 1px 1px 2px #00000080;
+}
+
+.dock-icone:nth-child(1) { background: #286baf; }
+.dock-icone:nth-child(2) { background: #d4a02c; }
+.dock-icone:nth-child(3) { background: #4d8b69; }
+.dock-icone:nth-child(4) { background: #b45e56; }
+.dock-icone:nth-child(5) { background: #8d6caa; }
+.dock-icone:nth-child(6) { background: #478c9c; }
+.dock-icone:nth-child(7) { background: #b47a47; }
+.dock-icone:nth-child(8) { background: #5674a2; }
+
+/* JANELA PRINCIPAL */
+
+.janela-principal {
+    position: relative;
+    z-index: 2;
+
+    width: min(1120px, 94%);
+    margin: 0 auto 35px;
+
+    border: 1px solid #ffffffa8;
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff55,
+        #ffffff20 45%,
+        #d7e9dd35
+    );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 12px 35px #00000045,
+        inset 0 1px 2px #ffffffb5,
+        inset 0 -1px 2px #ffffff30;
+
+    overflow: hidden;
+}
+
+/* BRILHO DO VIDRO */
+
+.janela-principal::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.22;
-    background-image: repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        #8c795b12 2px,
-        transparent 5px
+
+    background: linear-gradient(
+        120deg,
+        #ffffff35 0%,
+        transparent 25%,
+        transparent 70%,
+        #ffffff15 100%
     );
+
+    z-index: 0;
 }
 
-/* CABEÇALHO */
+/* BARRA SUPERIOR */
+
+.barra-superior {
+    position: relative;
+    z-index: 1;
+
+    min-height: 65px;
+    padding: 13px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    color: white;
+
+    background: linear-gradient(
+        180deg,
+        #ffffff55,
+        #ffffff12
+    );
+
+    border-bottom: 1px solid #ffffff75;
+    text-shadow: 1px 2px 3px #00000075;
+}
+
+.identidade {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.identidade strong {
+    font-size: 19px;
+    letter-spacing: 0.5px;
+}
+
+.identidade small {
+    font-size: 10px;
+    opacity: 0.9;
+}
+
+.controles-janela {
+    display: flex;
+    gap: 5px;
+}
+
+.controle {
+    width: 22px;
+    height: 19px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #26372d;
+    font-size: 12px;
+    font-weight: bold;
+
+    background: linear-gradient(#ffffff, #b9c9c0);
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+
+    box-shadow: 0 1px 3px #00000055;
+}
+
+/* CABEÇALHO DO CALENDÁRIO */
 
 .cabecalho {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 35px;
-    flex-wrap: wrap;
-    padding: 5px 0 25px;
-    border-bottom: 2px dashed #9e927b;
+    z-index: 1;
+
+    padding: 28px 20px 24px;
+
+    text-align: center;
+    color: #fff;
+
+    text-shadow: 1px 2px 5px #00000080;
 }
 
 .titulo-mes {
-    font-family: Georgia, serif;
-    font-size: clamp(42px, 7vw, 76px);
-    font-weight: normal;
-    margin: 0;
-    letter-spacing: -4px;
-    color: #453e32;
-}
-
-.titulo-mes span {
-    text-decoration: line-through;
-    text-decoration-thickness: 3px;
-    text-decoration-color: #a45d4d;
-}
-
-.subtitulo {
-    font-family: Georgia, serif;
-    font-size: clamp(17px, 2.5vw, 25px);
-    line-height: 1.3;
-    max-width: 220px;
-    transform: rotate(-2deg);
-}
-
-.subtitulo strong {
-    color: #9d5146;
-    font-size: 1.15em;
-}
-
-/* CALENDÁRIO */
-
-.calendario {
+    display: inline-block;
     position: relative;
+
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(42px, 7vw, 72px);
+    font-weight: normal;
+    letter-spacing: 3px;
+    line-height: 1.15;
+}
+
+/* RISCO ATRAVESSANDO A PALAVRA INTEIRA */
+
+.titulo-mes::after {
+    content: "";
+    position: absolute;
+
+    left: -4%;
+    top: 53%;
+
+    width: 108%;
+    height: 3px;
+
+    background: #f0e8d6;
+    box-shadow: 0 1px 2px #4d382e;
+
+    transform: rotate(-3deg);
+}
+
+/* FRASE COM EFEITO DE COLAGEM */
+
+.frase-colagem {
+    min-height: 58px;
+    margin: 14px auto 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+
+    font-family: Georgia, serif;
+    font-size: clamp(18px, 3vw, 27px);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.letra-colagem {
+    display: inline-block;
+    position: relative;
+
+    padding: 1px 0;
+
+    color: #fff8e8;
+    text-shadow: 1px 2px 3px #00000090;
+
+    animation: colagem 2.8s ease-in-out infinite;
+    animation-delay: var(--atraso);
+
+    transform-origin: center bottom;
+}
+
+.letra-colagem:nth-child(3n) {
+    color: #f8d9ad;
+}
+
+.letra-colagem:nth-child(4n) {
+    color: #dcebdc;
+}
+
+.letra-colagem:nth-child(5n) {
+    color: #f5d6d5;
+}
+
+@keyframes colagem {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    20% {
+        transform: translateY(-4px) rotate(-4deg);
+    }
+
+    45% {
+        transform: translateY(2px) rotate(3deg);
+    }
+
+    70% {
+        transform: translateY(-2px) rotate(-2deg);
+    }
+}
+
+/* LINHA DE INFORMAÇÕES */
+
+.informacoes {
+    position: relative;
+    z-index: 1;
+
+    margin: 0 24px 15px;
+    padding: 9px 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    color: #fff;
+    font-family: monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    background: #ffffff20;
+    border: 1px solid #ffffff65;
+    border-radius: 3px;
+
+    text-shadow: 1px 1px 2px #00000080;
+}
+
+/* ÁREA DO CALENDÁRIO */
+
+.area-calendario {
+    position: relative;
+    z-index: 1;
+
+    margin: 0 22px 20px;
+    padding: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #f2e8d2e8,
+        #ded4bde8
+    );
+
+    border: 1px solid #ffffffc9;
+    border-radius: 3px;
+
+    box-shadow:
+        inset 0 0 18px #84745b35,
+        0 3px 10px #00000030;
+}
+
+/* CABEÇALHO DA GRADE */
+
+.legenda-dias {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 16px 12px;
-    padding: 35px 10px 25px;
-    justify-items: center;
-    align-items: center;
+    gap: 7px;
+
+    margin-bottom: 9px;
 }
 
+.legenda-dias div {
+    padding: 8px 2px;
+
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    color: #51483d;
+
+    background: #c8bda5;
+    border-bottom: 2px solid #9e9078;
+}
+
+/* GRADE DOS 31 DIAS */
+
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 7px;
+}
+
+/* CÉLULA DE CADA DIA */
+
 .dia {
-    width: 100%;
-    height: 105px;
+    position: relative;
+
+    min-width: 0;
+    height: 100px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background:
+        linear-gradient(145deg, #fff9e9, #e8dec9);
+
+    border: 1px solid #b5a88d;
+    border-bottom: 2px solid #a99b7e;
+
+    box-shadow:
+        1px 2px 3px #75644d35,
+        inset 0 1px 2px #ffffff;
+
     cursor: pointer;
-    transition: transform 0.2s ease, filter 0.2s ease;
-    position: relative;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.dia::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+
+    border: 1px solid #b6a78a55;
+    pointer-events: none;
 }
 
 .dia img {
-    max-width: 100%;
-    max-height: 95px;
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    width: 88%;
+    height: 88%;
+
     object-fit: contain;
+
+    filter: drop-shadow(1px 2px 2px #00000035);
+
     transition: transform 0.2s ease;
-    filter: drop-shadow(2px 3px 2px #00000035);
 }
 
 .dia:hover {
-    transform: scale(1.2) rotate(-3deg);
-    z-index: 3;
+    z-index: 5;
+
+    transform: scale(1.13) rotate(-2deg);
+
+    background: #fffdf4;
+
+    box-shadow:
+        0 5px 14px #00000045,
+        0 0 9px #ffffffa8;
 }
 
 .dia:hover img {
-    filter: drop-shadow(4px 5px 3px #00000045);
+    transform: rotate(2deg) scale(1.04);
 }
 
 .dia:active {
-    transform: scale(1.08);
+    transform: scale(1.04);
 }
 
-/* JANELA POP-UP */
+/* RODAPÉ DA JANELA */
+
+.rodape {
+    position: relative;
+    z-index: 1;
+
+    padding: 12px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    color: white;
+    font-family: monospace;
+    font-size: 11px;
+
+    background: #ffffff20;
+    border-top: 1px solid #ffffff65;
+    text-shadow: 1px 1px 3px #00000090;
+}
+
+/* POP-UP */
 
 #fundo-popup {
     position: fixed;
     inset: 0;
-    background: #00000070;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
     z-index: 100;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 18px;
+
+    background: #101a1680;
+
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
 }
 
 #fundo-popup.visivel {
     display: flex;
 }
 
-.janela {
+.janela-popup {
     width: min(440px, 95vw);
-    background: #c6c6c6;
-    border: 2px solid white;
-    border-right-color: #555;
-    border-bottom-color: #555;
-    box-shadow: 5px 6px 0 #00000055;
-    animation: aparecer 0.2s ease-out;
+
+    overflow: hidden;
+
+    background: linear-gradient(
+        140deg,
+        #f4ead9f2,
+        #d9d0bff2
+    );
+
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+
+    box-shadow:
+        0 12px 35px #00000075,
+        inset 0 1px 2px white;
+
+    animation: abrirPopup 0.22s ease-out;
 }
 
-@keyframes aparecer {
+@keyframes abrirPopup {
     from {
         opacity: 0;
-        transform: scale(0.85);
+        transform: scale(0.88) rotate(-2deg);
     }
+
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) rotate(0);
     }
 }
 
-/* BARRA DA JANELA */
+.barra-popup {
+    min-height: 32px;
+    padding: 5px 8px;
 
-.barra-titulo {
-    background: linear-gradient(90deg, #172b55, #5579a8);
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 6px 7px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #365a4b,
+        #83a28a
+    );
+
+    border-bottom: 1px solid #ffffff;
 }
 
 .fechar {
     width: 22px;
-    height: 20px;
-    border: 1px solid white;
-    background: #c6c6c6;
-    color: black;
+    height: 21px;
+
+    color: #342d28;
     font-weight: bold;
+
+    background: linear-gradient(#fff, #c8c8c8);
+    border: 1px solid white;
+    border-radius: 3px;
+
     cursor: pointer;
 }
 
 .conteudo-popup {
     padding: 22px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
 }
 
+.numero-popup {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    color: #8b4e3d;
+}
+
 /* POLAROID */
 
 .polaroid {
-    width: 205px;
-    min-height: 225px;
+    width: 215px;
+    min-height: 235px;
+
     padding: 10px 10px 28px;
-    background: #f5f0e5;
-    box-shadow: 3px 5px 9px #00000035;
-    transform: rotate(-2deg);
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: #fffdf4;
+
+    box-shadow: 2px 5px 12px #00000035;
+
+    transform: rotate(-2deg);
 }
 
 .polaroid img {
     width: 100%;
-    height: 185px;
+    height: 190px;
+
     object-fit: cover;
-    background: #d4cbbb;
+
+    background: #d5cbb8;
 }
 
 .texto-memoria {
     width: 100%;
-    max-width: 330px;
+    max-width: 340px;
     min-height: 65px;
+
     padding: 12px;
-    background: #f0e8d7;
-    border: 1px dashed #a99c82;
+
+    color: #51483d;
     font-family: Georgia, serif;
     font-size: 15px;
     line-height: 1.5;
     text-align: center;
-    color: #51483b;
+
+    background: #fffaf0;
+    border: 1px dashed #a99b80;
 }
 
-.numero-popup {
-    font-family: Georgia, serif;
-    font-size: 23px;
-    color: #9d5146;
-}
-
-/* SETA DE VOLTAR */
+/* BOTÃO DE VOLTAR */
 
 .voltar {
     position: fixed;
-    left: 20px;
-    bottom: 20px;
-    width: 55px;
-    height: 55px;
     z-index: 20;
-    cursor: pointer;
+
+    left: 18px;
+    bottom: 18px;
+
+    width: 52px;
+    height: 52px;
+
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff45;
+    border: 1px solid #ffffffa8;
+    border-radius: 5px;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow: 0 3px 10px #00000035;
+
     transition: transform 0.2s;
 }
 
 .voltar:hover {
-    transform: scale(1.15);
+    transform: scale(1.12);
 }
 
 .voltar img {
@@ -289,17 +699,37 @@ body::before {
     object-fit: contain;
 }
 
-/* CELULAR */
+/* RESPONSIVIDADE */
 
-@media (max-width: 600px) {
-    .pagina {
-        padding: 20px 10px;
-        margin: 15px auto;
+@media (max-width: 700px) {
+    .dock {
+        margin-bottom: 15px;
+    }
+
+    .janela-principal {
+        width: 96%;
+    }
+
+    .barra-superior {
+        min-height: 55px;
+    }
+
+    .area-calendario {
+        margin: 0 9px 12px;
+        padding: 8px;
     }
 
     .calendario {
-        gap: 10px 4px;
-        padding: 25px 0;
+        gap: 4px;
+    }
+
+    .legenda-dias {
+        gap: 4px;
+    }
+
+    .legenda-dias div {
+        font-size: 9px;
+        padding: 7px 0;
     }
 
     .dia {
@@ -307,11 +737,27 @@ body::before {
     }
 
     .dia img {
-        max-height: 62px;
+        width: 94%;
+        height: 94%;
     }
 
-    .cabecalho {
-        gap: 12px;
+    .informacoes {
+        margin: 0 10px 12px;
+        font-size: 9px;
+    }
+
+    .rodape {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 390px) {
+    .dia {
+        height: 52px;
+    }
+
+    .legenda-dias div {
+        font-size: 8px;
     }
 }
 </style>
@@ -319,31 +765,100 @@ body::before {
 
 <body>
 
-<div class="pagina">
+<!-- DOCK SUPERIOR -->
 
-    <header class="cabecalho">
-        <h1 class="titulo-mes">
-            dezem<span>bro</span>
-        </h1>
-
-        <div class="subtitulo">
-            31 motivos pra ser
-            <strong>VOCÊ</strong>
-        </div>
-    </header>
-
-    <!-- OS 31 NÚMEROS SERÃO COLOCADOS AQUI -->
-    <main class="calendario" id="calendario"></main>
-
+<div class="dock">
+    <div class="dock-icone">Ps</div>
+    <div class="dock-icone">Ai</div>
+    <div class="dock-icone">W</div>
+    <div class="dock-icone">M</div>
+    <div class="dock-icone">P</div>
+    <div class="dock-icone">♫</div>
+    <div class="dock-icone">IE</div>
+    <div class="dock-icone">★</div>
 </div>
 
-<!-- JANELA DE MEMÓRIA -->
+
+<!-- JANELA PRINCIPAL -->
+
+<main class="janela-principal">
+
+    <!-- BARRA SUPERIOR -->
+
+    <header class="barra-superior">
+
+        <div class="identidade">
+            <strong>MEMORY BROWSER</strong>
+            <small>personal collection · december edition</small>
+        </div>
+
+        <div class="controles-janela">
+            <div class="controle">_</div>
+            <div class="controle">□</div>
+            <div class="controle">×</div>
+        </div>
+
+    </header>
+
+
+    <!-- TÍTULOS -->
+
+    <section class="cabecalho">
+
+        <h1 class="titulo-mes">-dezembro-</h1>
+
+        <div class="frase-colagem" id="frase-colagem">
+            31 motivos pra ser VOCÊ
+        </div>
+
+    </section>
+
+
+    <!-- INFORMAÇÕES -->
+
+    <div class="informacoes">
+        <span>MEMÓRIAS / DEZEMBRO</span>
+        <span>31 ARQUIVOS ENCONTRADOS</span>
+    </div>
+
+
+    <!-- CALENDÁRIO -->
+
+    <section class="area-calendario">
+
+        <div class="legenda-dias">
+            <div>DOM.</div>
+            <div>SEG.</div>
+            <div>TER.</div>
+            <div>QUA.</div>
+            <div>QUI.</div>
+            <div>SEX.</div>
+            <div>SÁB.</div>
+        </div>
+
+        <div class="calendario" id="calendario"></div>
+
+    </section>
+
+
+    <!-- RODAPÉ -->
+
+    <footer class="rodape">
+        <span>31 FILES · 31 MEMORIES</span>
+        <span>CLICK TO OPEN</span>
+    </footer>
+
+</main>
+
+
+<!-- POP-UP DAS LEMBRANÇAS -->
 
 <div id="fundo-popup">
-    <div class="janela">
 
-        <div class="barra-titulo">
-            <span id="titulo-janela">Uma lembrança especial</span>
+    <div class="janela-popup">
+
+        <div class="barra-popup">
+            <span id="titulo-janela">MEMORY VIEWER</span>
             <button class="fechar" onclick="fecharPopup()">X</button>
         </div>
 
@@ -362,8 +877,11 @@ body::before {
             </div>
 
         </div>
+
     </div>
+
 </div>
+
 
 <!-- VOLTAR -->
 
@@ -371,145 +889,84 @@ body::before {
     <img src="seta-voltar.png" alt="Voltar">
 </a>
 
+
 <script>
 
-/* =================================
-   PERSONALIZE OS 31 DIAS AQUI
-================================= */
+/* =====================================
+   FRASE COM MOVIMENTO DE COLAGEM
+===================================== */
+
+const frase = document.getElementById("frase-colagem");
+const textoFrase = "31 motivos pra ser VOCÊ";
+
+frase.textContent = "";
+
+[...textoFrase].forEach((letra, indice) => {
+
+    if (letra === " ") {
+        frase.appendChild(document.createTextNode(" "));
+        return;
+    }
+
+    const span = document.createElement("span");
+
+    span.className = "letra-colagem";
+    span.textContent = letra;
+
+    span.style.setProperty(
+        "--atraso",
+        (indice * 0.085) + "s"
+    );
+
+    frase.appendChild(span);
+
+});
+
+
+/* =====================================
+   PERSONALIZE AS 31 LEMBRANÇAS
+===================================== */
 
 const memorias = [
 
-    {
-        foto: "polaroid-01.jpg",
-        texto: "Escreva aqui o primeiro motivo."
-    },
-    {
-        foto: "polaroid-02.jpg",
-        texto: "Escreva aqui o segundo motivo."
-    },
-    {
-        foto: "polaroid-03.jpg",
-        texto: "Escreva aqui o terceiro motivo."
-    },
-    {
-        foto: "polaroid-04.jpg",
-        texto: "Escreva aqui o quarto motivo."
-    },
-    {
-        foto: "polaroid-05.jpg",
-        texto: "Escreva aqui o quinto motivo."
-    },
-    {
-        foto: "polaroid-06.jpg",
-        texto: "Escreva aqui o sexto motivo."
-    },
-    {
-        foto: "polaroid-07.jpg",
-        texto: "Escreva aqui o sétimo motivo."
-    },
-    {
-        foto: "polaroid-08.jpg",
-        texto: "Escreva aqui o oitavo motivo."
-    },
-    {
-        foto: "polaroid-09.jpg",
-        texto: "Escreva aqui o nono motivo."
-    },
-    {
-        foto: "polaroid-10.jpg",
-        texto: "Escreva aqui o décimo motivo."
-    },
-    {
-        foto: "polaroid-11.jpg",
-        texto: "Escreva aqui o décimo primeiro motivo."
-    },
-    {
-        foto: "polaroid-12.jpg",
-        texto: "Escreva aqui o décimo segundo motivo."
-    },
-    {
-        foto: "polaroid-13.jpg",
-        texto: "Escreva aqui o décimo terceiro motivo."
-    },
-    {
-        foto: "polaroid-14.jpg",
-        texto: "Escreva aqui o décimo quarto motivo."
-    },
-    {
-        foto: "polaroid-15.jpg",
-        texto: "Escreva aqui o décimo quinto motivo."
-    },
-    {
-        foto: "polaroid-16.jpg",
-        texto: "Escreva aqui o décimo sexto motivo."
-    },
-    {
-        foto: "polaroid-17.jpg",
-        texto: "Escreva aqui o décimo sétimo motivo."
-    },
-    {
-        foto: "polaroid-18.jpg",
-        texto: "Escreva aqui o décimo oitavo motivo."
-    },
-    {
-        foto: "polaroid-19.jpg",
-        texto: "Escreva aqui o décimo nono motivo."
-    },
-    {
-        foto: "polaroid-20.jpg",
-        texto: "Escreva aqui o vigésimo motivo."
-    },
-    {
-        foto: "polaroid-21.jpg",
-        texto: "Escreva aqui o vigésimo primeiro motivo."
-    },
-    {
-        foto: "polaroid-22.jpg",
-        texto: "Escreva aqui o vigésimo segundo motivo."
-    },
-    {
-        foto: "polaroid-23.jpg",
-        texto: "Escreva aqui o vigésimo terceiro motivo."
-    },
-    {
-        foto: "polaroid-24.jpg",
-        texto: "Escreva aqui o vigésimo quarto motivo."
-    },
-    {
-        foto: "polaroid-25.jpg",
-        texto: "Escreva aqui o vigésimo quinto motivo."
-    },
-    {
-        foto: "polaroid-26.jpg",
-        texto: "Escreva aqui o vigésimo sexto motivo."
-    },
-    {
-        foto: "polaroid-27.jpg",
-        texto: "Escreva aqui o vigésimo sétimo motivo."
-    },
-    {
-        foto: "polaroid-28.jpg",
-        texto: "Escreva aqui o vigésimo oitavo motivo."
-    },
-    {
-        foto: "polaroid-29.jpg",
-        texto: "Escreva aqui o vigésimo nono motivo."
-    },
-    {
-        foto: "polaroid-30.jpg",
-        texto: "Escreva aqui o trigésimo motivo."
-    },
-    {
-        foto: "polaroid-31.jpg",
-        texto: "Escreva aqui o trigésimo primeiro motivo."
-    }
+    { foto: "polaroid-01.jpg", texto: "Escreva aqui o primeiro motivo." },
+    { foto: "polaroid-02.jpg", texto: "Escreva aqui o segundo motivo." },
+    { foto: "polaroid-03.jpg", texto: "Escreva aqui o terceiro motivo." },
+    { foto: "polaroid-04.jpg", texto: "Escreva aqui o quarto motivo." },
+    { foto: "polaroid-05.jpg", texto: "Escreva aqui o quinto motivo." },
+    { foto: "polaroid-06.jpg", texto: "Escreva aqui o sexto motivo." },
+    { foto: "polaroid-07.jpg", texto: "Escreva aqui o sétimo motivo." },
+    { foto: "polaroid-08.jpg", texto: "Escreva aqui o oitavo motivo." },
+    { foto: "polaroid-09.jpg", texto: "Escreva aqui o nono motivo." },
+    { foto: "polaroid-10.jpg", texto: "Escreva aqui o décimo motivo." },
+    { foto: "polaroid-11.jpg", texto: "Escreva aqui o décimo primeiro motivo." },
+    { foto: "polaroid-12.jpg", texto: "Escreva aqui o décimo segundo motivo." },
+    { foto: "polaroid-13.jpg", texto: "Escreva aqui o décimo terceiro motivo." },
+    { foto: "polaroid-14.jpg", texto: "Escreva aqui o décimo quarto motivo." },
+    { foto: "polaroid-15.jpg", texto: "Escreva aqui o décimo quinto motivo." },
+    { foto: "polaroid-16.jpg", texto: "Escreva aqui o décimo sexto motivo." },
+    { foto: "polaroid-17.jpg", texto: "Escreva aqui o décimo sétimo motivo." },
+    { foto: "polaroid-18.jpg", texto: "Escreva aqui o décimo oitavo motivo." },
+    { foto: "polaroid-19.jpg", texto: "Escreva aqui o décimo nono motivo." },
+    { foto: "polaroid-20.jpg", texto: "Escreva aqui o vigésimo motivo." },
+    { foto: "polaroid-21.jpg", texto: "Escreva aqui o vigésimo primeiro motivo." },
+    { foto: "polaroid-22.jpg", texto: "Escreva aqui o vigésimo segundo motivo." },
+    { foto: "polaroid-23.jpg", texto: "Escreva aqui o vigésimo terceiro motivo." },
+    { foto: "polaroid-24.jpg", texto: "Escreva aqui o vigésimo quarto motivo." },
+    { foto: "polaroid-25.jpg", texto: "Escreva aqui o vigésimo quinto motivo." },
+    { foto: "polaroid-26.jpg", texto: "Escreva aqui o vigésimo sexto motivo." },
+    { foto: "polaroid-27.jpg", texto: "Escreva aqui o vigésimo sétimo motivo." },
+    { foto: "polaroid-28.jpg", texto: "Escreva aqui o vigésimo oitavo motivo." },
+    { foto: "polaroid-29.jpg", texto: "Escreva aqui o vigésimo nono motivo." },
+    { foto: "polaroid-30.jpg", texto: "Escreva aqui o trigésimo motivo." },
+    { foto: "polaroid-31.jpg", texto: "Escreva aqui o trigésimo primeiro motivo." }
 
 ];
 
 
-/* =================================
-   CRIAR OS 31 NÚMEROS
-================================= */
+/* =====================================
+   CRIAR OS 31 NÚMEROS COMO IMAGENS
+===================================== */
 
 const calendario = document.getElementById("calendario");
 
@@ -521,6 +978,7 @@ for (let i = 1; i <= 31; i++) {
     dia.className = "dia";
 
     const imagem = document.createElement("img");
+
     imagem.src = "dia-" + numero + ".png";
     imagem.alt = "Dia " + i;
     imagem.draggable = false;
@@ -532,12 +990,13 @@ for (let i = 1; i <= 31; i++) {
     });
 
     calendario.appendChild(dia);
+
 }
 
 
-/* =================================
-   ABRIR E FECHAR POP-UP
-================================= */
+/* =====================================
+   ABRIR POP-UP
+===================================== */
 
 function abrirPopup(dia) {
 
@@ -548,7 +1007,7 @@ function abrirPopup(dia) {
         "dia " + numero;
 
     document.getElementById("titulo-janela").textContent =
-        "31 motivos pra ser você!";
+        "MEMORY VIEWER";
 
     document.getElementById("foto-popup").src =
         memoria.foto;
@@ -560,14 +1019,19 @@ function abrirPopup(dia) {
         memoria.texto;
 
     document.getElementById("fundo-popup").classList.add("visivel");
+
 }
+
+
+/* =====================================
+   FECHAR POP-UP
+===================================== */
 
 function fecharPopup() {
+
     document.getElementById("fundo-popup").classList.remove("visivel");
+
 }
-
-
-/* FECHAR CLICANDO FORA DA JANELA */
 
 document.getElementById("fundo-popup").addEventListener("click", function(event) {
 
@@ -576,8 +1040,6 @@ document.getElementById("fundo-popup").addEventListener("click", function(event)
     }
 
 });
-
-/* FECHAR COM ESC */
 
 document.addEventListener("keydown", function(event) {
 
